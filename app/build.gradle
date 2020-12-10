@@ -47,4 +47,7 @@ dependencies {
 
     //pa image view redondeado
     implementation 'com.makeramen:roundedimageview:2.3.0'
+    //ps el neomorphismo
+    implementation 'com.github.fornewid:neumorphism:0.3.0'
+
 }

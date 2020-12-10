@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragments.Entrenamiento.Completado">
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/img_completado"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="56dp"
+
+
+        android:src="@drawable/ic_entrenamiento_completado"
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt_completado"
+
+        app:layout_constraintTop_toBottomOf="@id/img_completado"
+        app:layout_constraintLeft_toLeftOf="@id/img_completado"
+        app:layout_constraintRight_toRightOf="@id/img_completado"
+        android:layout_margin="17dp"
+
+        android:text="¡Completado!"
+        android:textSize="25sp"
+        android:fontFamily="@font/montserrat_semibold"
+        android:textColor="@color/black"
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/subtxt_completado"
+
+        app:layout_constraintTop_toBottomOf="@id/txt_completado"
+        app:layout_constraintLeft_toLeftOf="@id/txt_completado"
+        app:layout_constraintRight_toRightOf="@id/txt_completado"
+        android:layout_margin="5dp"
+
+        android:text="puedes comenzar tu entrenamiento"
+        android:textSize="15sp"
+        android:fontFamily="@font/montserrat_light"
+        android:textColor="@color/black"
+
+        />
+
+
+    <ImageButton
+        android:id="@+id/info1"
+        android:layout_width="97dp"
+        android:layout_height="40dp"
+
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/subtxt_completado"
+
+        android:background="@drawable/redondeado_blanco"
+        android:elevation="10dp"
+        />
+
+    <Button
+        android:id="@+id/info2"
+        android:layout_width="97dp"
+        android:layout_height="40dp"
+
+        android:layout_marginTop="32dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/subtxt_completado"
+
+        android:background="@drawable/redondeado_blanco"
+        android:elevation="15dp"
+        />
+
+    <Button
+        android:id="@+id/info3"
+        android:layout_width="97dp"
+        android:layout_height="40dp"
+
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/subtxt_completado"
+
+        android:background="@drawable/redondeado_blanco"
+        android:elevation="15dp"
+        />
+
+    <soup.neumorphism.NeumorphButton
+        android:layout_width="97dp"
+        android:layout_height="40dp"
+
+        style="@style/Widget.Neumorph.Button"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+
+        app:neumorph_shadowElevation="2.5dp"
+        app:neumorph_shadowColorLight="#FFFFFF"
+        app:neumorph_shadowColorDark="#813C3C3C"
+
+        app:neumorph_lightSource="leftTop"
+
+        app:neumorph_shapeType="flat"
+
+        app:neumorph_backgroundColor="#F4F4F4"
+
+        app:neumorph_inset="5dp"
+
+        android:padding="12dp"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

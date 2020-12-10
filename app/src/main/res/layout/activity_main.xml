@@ -24,6 +24,7 @@
         app:itemTextColor="@color/tab_item_text"
         android:background="#fff"
 
+        android:elevation="5dp"
         app:itemTextAppearanceActive="@style/bottomtext_appearance"
         app:itemTextAppearanceInactive="@style/bottomtext_appearance"
         app:layout_constraintEnd_toEndOf="parent"

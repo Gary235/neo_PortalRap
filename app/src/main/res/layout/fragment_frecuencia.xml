@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Fragments.Bases">
+    tools:context=".Fragments.Entrenamiento.Frecuencia">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_bases"
+        android:id="@+id/toolbar_frecuencia"
         style="@android:style/Widget.Material.Toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -15,32 +15,20 @@
         android:elevation="5dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:titleTextColor="@color/black"
-        app:title="Bases"
-        app:menu="@menu/bases_menu"
+
+        app:menu="@menu/ayuda_menu"
         app:titleTextAppearance="@style/titlefont_2"
+        app:title="Frecuencia"
+        app:navigationIcon="@drawable/ic_cruz_negra"
 
         app:layout_constraintTop_toTopOf="parent"
         />
 
 
-    <ImageButton
-        android:id="@+id/btnEntrenar_bases"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="86dp"
-        android:background="@drawable/circulo_violeta"
-        android:src="@drawable/ic_grabar"
-        android:elevation="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
-
-
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/img_paso4"
+        android:id="@+id/img_paso2"
 
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -48,21 +36,21 @@
         android:layout_marginTop="80dp"
 
 
-        android:src="@drawable/ic_paso_4"
+        android:src="@drawable/ic_paso_2"
 
         />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/txt_paso4"
+        android:id="@+id/txt_paso3"
 
-        app:layout_constraintTop_toBottomOf="@id/img_paso4"
-        app:layout_constraintLeft_toLeftOf="@id/img_paso4"
-        app:layout_constraintRight_toRightOf="@id/img_paso4"
+        app:layout_constraintTop_toBottomOf="@id/img_paso2"
+        app:layout_constraintLeft_toLeftOf="@id/img_paso2"
+        app:layout_constraintRight_toRightOf="@id/img_paso2"
         android:layout_margin="25dp"
 
-        android:text="Paso 4"
+        android:text="Paso 2"
         android:textSize="18sp"
         android:fontFamily="@font/montserrat_semibold"
         android:textColor="@color/black"
@@ -72,7 +60,7 @@
     <ImageButton
         android:layout_width="100dp"
         android:layout_height="40dp"
-        android:id="@+id/btn_anterior_bases"
+        android:id="@+id/btn_anterior_frecuencia"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -87,7 +75,7 @@
     <ImageButton
         android:layout_width="100dp"
         android:layout_height="40dp"
-        android:id="@+id/btn_siguiente_bases"
+        android:id="@+id/btn_siguiente_frecuencia"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -98,8 +86,6 @@
         android:src="@drawable/ic_flecha_der"
         android:elevation="5dp"
         />
-
-
 
 
 

@@ -8,23 +8,18 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.neo_portalrap.Fragments.Bases;
+import com.example.neo_portalrap.Fragments.Entrenamiento.Completado;
+import com.example.neo_portalrap.Fragments.Entrenamiento.Duracion;
+import com.example.neo_portalrap.Fragments.Entrenamiento.Frecuencia;
 import com.example.neo_portalrap.Fragments.Home;
-import com.example.neo_portalrap.Fragments.Usuario;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.example.neo_portalrap.Fragments.Entrenamiento.Modo;
+import com.example.neo_portalrap.Fragments.Usuario.Usuario;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -59,47 +54,84 @@ public class MainActivity extends AppCompatActivity {
 
             switch (item.getItemId()){
                 case R.id.home:
-                    fragseleccionado = new Home();
-                    /*FragBases.isActionMode = false;
-                    FragBases.actionMode = null;
-                    FragBases.UserSelection.clear();*/
+                    toHome();
+
                     break;
                 case R.id.bases:
-                    fragseleccionado = new Bases();
-                    /*FragBases.isActionMode = false;
-                    FragBases.actionMode = null;
-                    FragBases.UserSelection.clear();
+                    toBases(false);
 
-                    Bundle args = new Bundle();
-                    args.putString("desdedur","no");
-                    fragseleccionado.setArguments(args);*/
                     break;
                 case R.id.usuario:
-                    fragseleccionado = new Usuario();
-                    /*FragBases.isActionMode = false;
-                    FragBases.actionMode = null;
-                    FragBases.UserSelection.clear();*/
+                    toUsuario();
                     break;
             }
 
-            transaccionFragment=adminFragment.beginTransaction();
-            transaccionFragment.replace(R.id.frameLayout, fragseleccionado,null);
-            transaccionFragment.addToBackStack(null);
-            transaccionFragment.commit();
             return true;
         }
     };
 
 
     public void toHome() {
+        bottom.setVisibility(View.VISIBLE);
         FragGlobal = new Home();
         transaccionFragment=adminFragment.beginTransaction();
         transaccionFragment.replace(R.id.frameLayout, FragGlobal,null);
         transaccionFragment.addToBackStack(null);
         transaccionFragment.commit();
-
     }
 
+    public void toUsuario() {
+        FragGlobal = new Usuario();
+        transaccionFragment=adminFragment.beginTransaction();
+        transaccionFragment.replace(R.id.frameLayout, FragGlobal,null);
+        transaccionFragment.addToBackStack(null);
+        transaccionFragment.commit();
+    }
+
+    public void toBases(Boolean train) {
+        FragGlobal = new Bases();
+        Bundle args = new Bundle();
+        args.putBoolean("train", train);
+        FragGlobal.setArguments(args);
+
+        transaccionFragment=adminFragment.beginTransaction();
+        transaccionFragment.replace(R.id.frameLayout, FragGlobal,null);
+        transaccionFragment.addToBackStack(null);
+        transaccionFragment.commit();
+    }
+
+    public void toModo() {
+        bottom.setVisibility(View.GONE);
+        FragGlobal = new Modo();
+        transaccionFragment=adminFragment.beginTransaction();
+        transaccionFragment.replace(R.id.frameLayout, FragGlobal,null);
+        transaccionFragment.addToBackStack(null);
+        transaccionFragment.commit();
+    }
+
+    public void toFrecuencia() {
+        FragGlobal = new Frecuencia();
+        transaccionFragment=adminFragment.beginTransaction();
+        transaccionFragment.replace(R.id.frameLayout, FragGlobal,null);
+        transaccionFragment.addToBackStack(null);
+        transaccionFragment.commit();
+    }
+
+    public void toDuracion() {
+        FragGlobal = new Duracion();
+        transaccionFragment=adminFragment.beginTransaction();
+        transaccionFragment.replace(R.id.frameLayout, FragGlobal,null);
+        transaccionFragment.addToBackStack(null);
+        transaccionFragment.commit();
+    }
+
+    public void toCompletado() {
+        FragGlobal = new Completado();
+        transaccionFragment=adminFragment.beginTransaction();
+        transaccionFragment.replace(R.id.frameLayout, FragGlobal,null);
+        transaccionFragment.addToBackStack(null);
+        transaccionFragment.commit();
+    }
 
 
 }
