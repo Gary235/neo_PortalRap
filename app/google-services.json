@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "107652028257",
+    "project_id": "neo-portal-rap",
+    "storage_bucket": "neo-portal-rap.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:107652028257:android:d16475c8f863bbbae49720",
+        "android_client_info": {
+          "package_name": "com.example.neo_portalrap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "107652028257-61r2n4uvd14bgb9kkoc8c0fjjosern5h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9QZHQE64Q6M6OJS1dHHpn4HOO9VCExEU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "107652028257-61r2n4uvd14bgb9kkoc8c0fjjosern5h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
