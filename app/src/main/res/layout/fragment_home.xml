@@ -25,17 +25,6 @@
         app:layout_constraintTop_toTopOf="parent"
         />
 
-    <ImageButton
-        android:id="@+id/btnEntrenar_home"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
 
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="86dp"
-        android:background="@drawable/circulo_violeta"
-        android:src="@drawable/ic_grabar"
-        android:elevation="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

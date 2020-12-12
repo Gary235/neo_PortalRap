@@ -1,21 +1,20 @@
 package com.example.neo_portalrap.Fragments.Usuario;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import com.example.neo_portalrap.R;
 
 
-public class fragment_viewpager extends Fragment {
+public class fragment_viewpager_fav extends Fragment {
 
 
     public static final String ARG_OBJECT = "object";
@@ -35,13 +34,17 @@ public class fragment_viewpager extends Fragment {
 
         if(num_object == 1){
             ((TextView) view.findViewById(R.id.text1))
-                    .setText("Mis Grabaciones");
+                    .setText("Bases");
+
+        }
+        else if(num_object == 2){
+            ((TextView) view.findViewById(R.id.text1))
+                    .setText("Grabaciones");
 
         }
         else {
             ((TextView) view.findViewById(R.id.text1))
-                    .setText("Mis Beats");
-
+                    .setText("Mis Bases");
         }
 
 

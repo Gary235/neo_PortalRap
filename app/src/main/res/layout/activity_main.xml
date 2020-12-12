@@ -33,5 +33,22 @@
 
         />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floating_action_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+
+        android:backgroundTint="@color/violeta_claro"
+        app:fabSize="auto"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="85dp"
+        android:contentDescription="Entrenar"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:srcCompat="@drawable/ic_grabar"
+        />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

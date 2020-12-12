@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragments.Usuario.EditarPerfil">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_editar"
+        style="@android:style/Widget.Material.Toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        android:elevation="5dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:titleTextColor="@color/black"
+
+        app:menu="@menu/ayuda_menu"
+        app:titleTextAppearance="@style/titlefont_2"
+        app:title="Editar Perfil"
+
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:id="@+id/img_editar"
+        app:riv_corner_radius="15dp"
+        android:adjustViewBounds="true"
+
+        android:elevation="10dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/foto"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+
+        android:layout_marginTop="80dp"
+        android:layout_marginLeft="20dp"
+        />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt_nombre_editar"
+
+        app:layout_constraintLeft_toRightOf="@id/img_editar"
+        app:layout_constraintTop_toTopOf="@id/img_editar"
+        app:layout_constraintBottom_toBottomOf="@id/img_editar"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="30dp"
+
+        android:text="Gary"
+        android:textSize="24sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/montserrat_semibold"
+
+        />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt_email_editar"
+
+        app:layout_constraintLeft_toRightOf="@id/img_editar"
+        app:layout_constraintTop_toTopOf="@id/img_editar"
+        app:layout_constraintBottom_toBottomOf="@id/img_editar"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="30dp"
+
+        android:text="berkman.gary@gmail.com"
+        android:textSize="14sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/montserrat_light"
+        />
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/btnCambiarFoto"
+
+        app:layout_constraintTop_toBottomOf="@id/img_editar"
+        android:layout_marginTop="50dp"
+        android:layout_marginHorizontal="20dp"
+
+        android:background="@drawable/redondeado_violeta"
+        android:text="Cambiar Foto"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:fontFamily="@font/montserrat_semibold"
+        android:textSize="18dp"
+
+        />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

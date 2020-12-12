@@ -25,7 +25,7 @@ public class Bases extends Fragment {
 
     Toolbar toolbar;
     ImageView img_paso4;
-    ImageButton btnEntrenar, btnSiguiente, btnAnterior;
+    ImageButton btnSiguiente, btnAnterior;
     TextView txt_paso4;
 
 
@@ -72,14 +72,11 @@ public class Bases extends Fragment {
 
         btnAnterior = v.findViewById(R.id.btn_anterior_bases);
         btnSiguiente = v.findViewById(R.id.btn_siguiente_bases);
-        btnEntrenar = v.findViewById(R.id.btnEntrenar_bases);
         img_paso4 = v.findViewById(R.id.img_paso4);
         txt_paso4 = v.findViewById(R.id.txt_paso4);
 
         if(train){
-            btnEntrenar.setVisibility(View.GONE);
             toolbar.setNavigationIcon(R.drawable.ic_cruz_negra);
-
 
             btnAnterior.setOnClickListener(a -> {
                 MainActivity mainActivity = (MainActivity) getActivity();
@@ -96,11 +93,6 @@ public class Bases extends Fragment {
             btnAnterior.setVisibility(View.GONE);
             txt_paso4.setVisibility(View.GONE);
             img_paso4.setVisibility(View.GONE);
-
-            btnEntrenar.setOnClickListener(a -> {
-                MainActivity mainActivity = (MainActivity) getActivity();
-                mainActivity.toModo();
-            });
 
         }
 

@@ -1,4 +1,4 @@
-package com.example.neo_portalrap.Fragments;
+package com.example.neo_portalrap.Fragments.Usuario;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
@@ -10,18 +10,17 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+import android.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import com.example.neo_portalrap.MainActivity;
 import com.example.neo_portalrap.R;
 
 
-public class Home extends Fragment {
+public class EditarPerfil extends Fragment {
 
-    Toolbar toolbar;
+    androidx.appcompat.widget.Toolbar toolbar;
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -31,12 +30,16 @@ public class Home extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId())
-        {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                MainActivity mainActivity = (MainActivity) getActivity();
+                mainActivity.toUsuario();
+                break;
             case R.id.home_ayuda:
                 AlertDialog.Builder mensaje;
                 mensaje = new AlertDialog.Builder(getActivity());
-                mensaje.setTitle("Home");
+                mensaje.setTitle("Editar Perfil");
                 mensaje.setMessage("hola");
                 mensaje.setPositiveButton("Ok",null);
                 mensaje.create();
@@ -47,25 +50,23 @@ public class Home extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_editar_perfil, container, false);
 
-        View v = inflater.inflate(R.layout.fragment_home, container, false);
 
-        toolbar = v.findViewById(R.id.toolbar_home);
+        toolbar = v.findViewById(R.id.toolbar_editar);
         setHasOptionsMenu(true);
-
-        toolbar.setTitle("Hola, Gary");
-
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+
+
 
         return v;
     }
-
-
-
-
-
 }

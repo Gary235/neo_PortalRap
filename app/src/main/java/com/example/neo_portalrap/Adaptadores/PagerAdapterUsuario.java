@@ -6,19 +6,19 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.example.neo_portalrap.Fragments.Usuario.fragment_viewpager;
+import com.example.neo_portalrap.Fragments.Usuario.fragment_viewpager_usuario;
 
-public class DemoCollectionPagerAdapter extends FragmentStatePagerAdapter {
-    public DemoCollectionPagerAdapter(FragmentManager fm) {
+public class PagerAdapterUsuario extends FragmentStatePagerAdapter {
+    public PagerAdapterUsuario(FragmentManager fm) {
         super(fm);
     }
 
     @Override
     public Fragment getItem(int i) {
-        Fragment fragment = new fragment_viewpager();
+        Fragment fragment = new fragment_viewpager_usuario();
         Bundle args = new Bundle();
         // Our object is just an integer :-P
-        args.putInt(fragment_viewpager.ARG_OBJECT, i + 1);
+        args.putInt(fragment_viewpager_usuario.ARG_OBJECT, i + 1);
         fragment.setArguments(args);
         return fragment;
     }
@@ -30,7 +30,7 @@ public class DemoCollectionPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return (position + 1 == 1) ? "Mis Grabaciones" : "Mis Bases";
+        return (position + 1 == 1) ? "Grabaciones" : "Mis Bases";
     }
 
 

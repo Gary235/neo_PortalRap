@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="45dp"
 
 
         android:src="@drawable/ic_entrenamiento_completado"
@@ -30,7 +30,6 @@
         app:layout_constraintTop_toBottomOf="@id/img_completado"
         app:layout_constraintLeft_toLeftOf="@id/img_completado"
         app:layout_constraintRight_toRightOf="@id/img_completado"
-        android:layout_margin="17dp"
 
         android:text="¡Completado!"
         android:textSize="25sp"
@@ -57,72 +56,111 @@
         />
 
 
-    <ImageButton
-        android:id="@+id/info1"
-        android:layout_width="97dp"
+    <ImageView
+        android:id="@+id/info"
+        android:layout_width="match_parent"
         android:layout_height="40dp"
 
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginHorizontal="20dp"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/subtxt_completado"
 
         android:background="@drawable/redondeado_blanco"
         android:elevation="10dp"
         />
 
-    <Button
-        android:id="@+id/info2"
-        android:layout_width="97dp"
-        android:layout_height="40dp"
 
-        android:layout_marginTop="32dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/subtxt_completado"
+    <ImageView
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:id="@+id/img_modo_seleccionado"
 
-        android:background="@drawable/redondeado_blanco"
-        android:elevation="15dp"
+        app:layout_constraintTop_toTopOf="@id/info"
+        app:layout_constraintBottom_toBottomOf="@id/info"
+        app:layout_constraintLeft_toLeftOf="@id/info"
+        android:layout_marginLeft="50dp"
+
         />
 
-    <Button
-        android:id="@+id/info3"
-        android:layout_width="97dp"
-        android:layout_height="40dp"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/frecuencia_seleccionada"
 
+        app:layout_constraintTop_toTopOf="@id/info"
+        app:layout_constraintBottom_toBottomOf="@id/info"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/duracion_seleccionada"
+
+        app:layout_constraintTop_toTopOf="@id/info"
+        app:layout_constraintBottom_toBottomOf="@id/info"
+        app:layout_constraintRight_toRightOf="@id/info"
+        android:layout_marginRight="50dp"
+
+        />
+    <ImageView
+        android:id="@+id/fondo_lstseleccion"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+
+        android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="32dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/subtxt_completado"
+        android:layout_marginTop="20dp"
 
         android:background="@drawable/redondeado_blanco"
-        android:elevation="15dp"
-        />
+        android:elevation="10dp"
 
-    <soup.neumorphism.NeumorphButton
-        android:layout_width="97dp"
-        android:layout_height="40dp"
-
-        style="@style/Widget.Neumorph.Button"
-
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/info"
 
-        app:neumorph_shadowElevation="2.5dp"
-        app:neumorph_shadowColorLight="#FFFFFF"
-        app:neumorph_shadowColorDark="#813C3C3C"
+         />
 
-        app:neumorph_lightSource="leftTop"
+    <Button
+        android:layout_width="130dp"
+        android:layout_height="40dp"
+        android:id="@+id/btn_volver_completado"
 
-        app:neumorph_shapeType="flat"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="40dp"
 
-        app:neumorph_backgroundColor="#F4F4F4"
+        android:background="@drawable/redondeado_stroke_violeta"
+        android:text="Volver"
+        android:textAllCaps="false"
+        android:textColor="@color/violeta_claro"
+        android:textSize="15sp"
+        android:fontFamily="@font/montserrat_regular"
 
-        app:neumorph_inset="5dp"
+        />
 
-        android:padding="12dp"
+    <Button
+        android:layout_width="130dp"
+        android:layout_height="40dp"
+        android:id="@+id/btn_entrenar_completado"
+
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="40dp"
+
+        android:background="@drawable/redondeado_violeta"
+        android:text="Entrenar"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:fontFamily="@font/montserrat_semibold"
+
         />
 
 
