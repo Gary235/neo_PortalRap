@@ -24,7 +24,7 @@ public class SplashScreen extends AppCompatActivity {
             startActivity(intent);
             finish();
             Log.d("Handler", "Running Handler");
-        }, 1500);
+        }, 800);
 
 
     }

@@ -72,7 +72,7 @@ public class Favoritos extends Fragment {
         int[] tabIcons = {
                 R.drawable.ic_bases,
                 R.drawable.ic_grabaciones,
-                R.drawable.ic_misbeats
+                R.drawable.ic_mis_bases
         };
 
         tabLayout.getTabAt(0).setIcon(tabIcons[0]);
