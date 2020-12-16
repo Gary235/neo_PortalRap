@@ -18,13 +18,12 @@ public class SplashScreen extends AppCompatActivity {
 
         final Handler handler = new Handler();
         handler.postDelayed(() -> {
-            //Write whatever to want to do after delay specified (1 sec)
             Intent intent;
             intent = new Intent(getApplicationContext() ,MainActivity.class);
             startActivity(intent);
             finish();
             Log.d("Handler", "Running Handler");
-        }, 800);
+        }, 500);
 
 
     }

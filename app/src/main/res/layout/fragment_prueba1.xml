@@ -14,7 +14,7 @@
         android:id="@+id/appbar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         >
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_usuario"
@@ -22,12 +22,13 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/white"
+            android:elevation="5dp"
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
             app:titleTextColor="@color/black"
 
             app:menu="@menu/ayuda_menu"
             app:titleTextAppearance="@style/titlefont_2"
-            app:title="Gary"
+            app:title="Gary Berkman"
 
             app:layout_scrollFlags="scroll|enterAlways"
 
@@ -65,7 +66,7 @@
             android:src="@drawable/ic_editar"
             app:layout_scrollFlags="scroll|enterAlways"
 
-            />
+           />
 
         <Button
             android:id="@+id/btn_Favoritos"
@@ -82,7 +83,6 @@
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="16dp"
-            app:layout_scrollFlags="scroll|enterAlways"
 
             />
 
@@ -90,38 +90,52 @@
 
 
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        >
-
-
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/viewpager_usuario"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            >
 
-            tools:ignore="MissingConstraints">
 
-
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tab_layout_usuario"
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewpager_usuario"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
 
-                app:tabIndicatorColor="@color/violeta_claro"
-
-                app:tabIconTint="@color/tab_item_icon"
-                app:tabTextColor="@color/tab_item_text"
-
-                />
+                android:layout_marginTop="220dp"
+                android:layout_marginBottom="72dp"
+                >
 
 
-        </androidx.viewpager.widget.ViewPager>
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tab_layout_usuario"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    app:tabIndicatorColor="@color/violeta_claro"
+
+                    app:tabIconTint="@color/tab_item_icon"
+                    app:tabTextColor="@color/tab_item_text"
+
+                    />
 
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+            </androidx.viewpager.widget.ViewPager>
+
+
+
+
+
+            <!--<androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/lst_prueba"
+
+                android:layout_marginBottom="10dp"
+
+                tools:ignore="MissingConstraints" />
+-->
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

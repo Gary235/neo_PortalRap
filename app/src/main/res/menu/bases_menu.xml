@@ -4,15 +4,19 @@
 
     <item
         android:id="@+id/buscar_bases"
-        android:icon="@drawable/ic_buscar"
-        app:showAsAction="always"
         android:title="Buscar"
+        app:showAsAction="collapseActionView|ifRoom"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        android:icon="@drawable/ic_buscar"
+
         />
+
+
 
     <item
         android:id="@+id/ayuda_bases"
         android:icon="@drawable/ic_ayuda"
-        app:showAsAction="always"
+        app:showAsAction="ifRoom"
         android:title="Ayuda"
         />
 </menu>

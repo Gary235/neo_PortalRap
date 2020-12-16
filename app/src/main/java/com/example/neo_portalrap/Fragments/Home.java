@@ -10,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,10 +23,11 @@ import com.example.neo_portalrap.R;
 public class Home extends Fragment {
 
     Toolbar toolbar;
+    Button btnPrueba;
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.ayuda_menu, menu);
+        inflater.inflate(R.menu.configuracion_menu, menu);
         super.onCreateOptionsMenu(menu,inflater);
     }
 
@@ -33,7 +35,7 @@ public class Home extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId())
         {
-            case R.id.home_ayuda:
+            case R.id.configuracion:
                 AlertDialog.Builder mensaje;
                 mensaje = new AlertDialog.Builder(getActivity());
                 mensaje.setTitle("Home");
@@ -60,6 +62,13 @@ public class Home extends Fragment {
         toolbar.setTitle("Hola, Gary");
 
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+
+        btnPrueba = v.findViewById(R.id.buttonprueba);
+
+        btnPrueba.setOnClickListener(a -> {
+            MainActivity mainActivity = (MainActivity) getActivity();
+            mainActivity.toPrueba();
+        });
 
         return v;
     }

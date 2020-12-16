@@ -1,12 +1,18 @@
 package com.example.neo_portalrap.Fragments.Usuario;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.os.Bundle;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
@@ -19,11 +25,41 @@ import com.google.android.material.tabs.TabLayout;
 
 public class Usuario extends Fragment  {
 
+
+    androidx.appcompat.widget.Toolbar toolbar;
     ViewPager viewPager;
     TabLayout tabLayout;
     PagerAdapterUsuario pagerAdapterUsuario;
 
-    ImageButton btnFav,btnEditar;
+    ImageButton btnEditar;
+    Button btnFav;
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.exit_menu, menu);
+        super.onCreateOptionsMenu(menu,inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+
+            case R.id.logout:
+                AlertDialog.Builder mensaje;
+                mensaje = new AlertDialog.Builder(getActivity());
+                mensaje.setTitle("Usuario");
+                mensaje.setMessage("hola");
+                mensaje.setPositiveButton("Ok",null);
+                mensaje.create();
+                mensaje.show();
+                break;
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,6 +94,12 @@ public class Usuario extends Fragment  {
             mainActivity.toEditarPerfil();
 
         });
+
+        toolbar = v.findViewById(R.id.toolbar_usuario);
+        setHasOptionsMenu(true);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+
+
 
         return v;
     }

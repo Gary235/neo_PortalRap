@@ -31,6 +31,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_menu"
 
+        app:layout_behavior="com.example.app.ScrollAwareFABBehavior"
         />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -38,13 +39,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-
         android:backgroundTint="@color/violeta_claro"
+        android:tint="@color/white"
+        app:tint="@color/white"
+
         app:fabSize="auto"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="85dp"
         android:contentDescription="Entrenar"
 
+        app:layout_behavior="com.example.app.ScrollAwareFABBehavior"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:srcCompat="@drawable/ic_grabar"
