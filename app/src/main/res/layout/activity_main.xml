@@ -34,25 +34,28 @@
         app:layout_behavior="com.example.app.ScrollAwareFABBehavior"
         />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floating_action_button"
+
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/extended_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
+        android:elevation="10dp"
+        app:icon="@drawable/ic_grabar"
+        android:text="Entrenar"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:iconTint="@color/white"
         android:backgroundTint="@color/violeta_claro"
-        android:tint="@color/white"
-        app:tint="@color/white"
 
-        app:fabSize="auto"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="85dp"
+        android:layout_marginBottom="95dp"
         android:contentDescription="Entrenar"
 
         app:layout_behavior="com.example.app.ScrollAwareFABBehavior"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:srcCompat="@drawable/ic_grabar"
         />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -35,7 +35,7 @@ public class Duracion extends Fragment {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
                 MainActivity mainActivity = (MainActivity) getActivity();
-                mainActivity.toHome();
+                mainActivity.toHome(true);
                 break;
             case R.id.home_ayuda:
                 AlertDialog.Builder mensaje;

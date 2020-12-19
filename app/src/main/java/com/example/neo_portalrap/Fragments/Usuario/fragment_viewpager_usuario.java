@@ -74,11 +74,11 @@ public class fragment_viewpager_usuario extends Fragment {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 if(dy > 0){
-                    MainActivity.FAB.hide();
+                    MainActivity.extFAB.hide();
                     //MainActivity.bottom.animate().alpha(0).start();
                     MainActivity.bottom.setVisibility(View.GONE);
                 } else{
-                    MainActivity.FAB.show();
+                    MainActivity.extFAB.show();
                     //MainActivity.bottom.animate().alpha(1).start();
                     MainActivity.bottom.setVisibility(View.VISIBLE);
 

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.os.Bundle;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -65,6 +66,13 @@ public class Usuario extends Fragment  {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_usuario, container, false);
+
+        final Handler handler = new Handler();
+        handler.postDelayed(() -> {
+
+            MainActivity.extFAB.shrink();
+        }, 2000);
+
 
         btnEditar = v.findViewById(R.id.btn_editar_perfil);
         btnFav = v.findViewById(R.id.btn_Favoritos);

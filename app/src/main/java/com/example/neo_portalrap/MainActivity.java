@@ -8,6 +8,7 @@ import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static BottomNavigationView bottom;
     public static FloatingActionButton FAB;
+    public static ExtendedFloatingActionButton extFAB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,47 +56,59 @@ public class MainActivity extends AppCompatActivity {
         bottom = findViewById(R.id.bottomnavigation);
         bottom.setOnNavigationItemSelectedListener(listenernav);
 
-        FAB = findViewById(R.id.floating_action_button);
+        extFAB = findViewById(R.id.extended_fab);
         setHomeFAB();
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
-
-        toHome();
+        toHome(false);
     }
 
 
 
     public void setUserFAB(){
-        FAB.setVisibility(View.VISIBLE);
-        FAB.setOnClickListener(a -> {
-            //toModo();
-        });
 
+
+        extFAB.setVisibility(View.VISIBLE);
+        extFAB.setOnClickListener(a -> {
+
+        });
 
     }
     public void setHomeFAB(){
-        FAB.setVisibility(View.VISIBLE);
-        FAB.setOnClickListener(a -> {
-            toModo();
+
+
+        extFAB.setVisibility(View.VISIBLE);
+        extFAB.setOnClickListener(a -> {
+            toModo(true);
         });
+
 
     }
     public void setBasesFAB(){
-        FAB.setVisibility(View.VISIBLE);
-        FAB.setOnClickListener(a -> {
-            //toModo();
+
+        extFAB.setVisibility(View.VISIBLE);
+        extFAB.setOnClickListener(a -> {
+            toModo(true);
         });
+
+
     }
     int[] iconIntArray = {
             R.drawable.ic_grabar,
-            R.drawable.ic_bases_blanco,
+            R.drawable.ic_grabar,
             R.drawable.ic_plus
     };
 
+    String[] fabtextarray = {
+            "Entrenar",
+            "Entrenar",
+            "Subir Base"
+
+    };
 
     protected void animateFab(final int position) {
-        FAB.clearAnimation();
+        extFAB.clearAnimation();
         // Scale down animation
         ScaleAnimation shrink =  new ScaleAnimation(1f, 0.2f, 1f, 0.2f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         shrink.setDuration(150);     // animation duration in milliseconds
@@ -108,7 +122,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onAnimationEnd(Animation animation) {
                 // Change FAB color and icon
-                FAB.setImageDrawable(getResources().getDrawable(iconIntArray[position], null));
+                extFAB.setIconResource(iconIntArray[position]);
+                extFAB.setText(fabtextarray[position]);
 
                 switch (position){
                     case 0:
@@ -126,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
                 ScaleAnimation expand =  new ScaleAnimation(0.2f, 1f, 0.2f, 1f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
                 expand.setDuration(100);     // animation duration in milliseconds
                 expand.setInterpolator(new AccelerateInterpolator());
-                FAB.startAnimation(expand);
+                extFAB.startAnimation(expand);
             }
 
             @Override
@@ -134,14 +149,14 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        FAB.startAnimation(shrink);
+        extFAB.startAnimation(shrink);
     }
     @SuppressLint("NonConstantResourceId")
     private final BottomNavigationView.OnNavigationItemSelectedListener listenernav = item -> {
 
         switch (item.getItemId()){
             case R.id.home:
-                toHome();
+                toHome(false);
                 animateFab(0);
 
                 break;
@@ -162,7 +177,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void toPrueba() {
         bottom.setVisibility(View.VISIBLE);
-        FAB.setVisibility(View.VISIBLE);
+        extFAB.setVisibility(View.VISIBLE);
+
 
         FragGlobal = new prueba1();
         transaccionFragment=adminFragment.beginTransaction();
@@ -171,11 +187,17 @@ public class MainActivity extends AppCompatActivity {
         transaccionFragment.commit();
     }
 
-    public void toHome() {
+    public void toHome(boolean desdeentrenamiento) {
         bottom.setVisibility(View.VISIBLE);
-        FAB.setVisibility(View.VISIBLE);
+        extFAB.setVisibility(View.VISIBLE);
 
         FragGlobal = new Home();
+        Bundle args = new Bundle();
+        args.putBoolean("desdeentrenamiento", desdeentrenamiento);
+        FragGlobal.setArguments(args);
+
+        extFAB.extend();
+
         transaccionFragment=adminFragment.beginTransaction();
         transaccionFragment.replace(R.id.frameLayout, FragGlobal,null);
         transaccionFragment.addToBackStack(null);
@@ -184,7 +206,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void toUsuario() {
         bottom.setVisibility(View.VISIBLE);
-        FAB.setVisibility(View.VISIBLE);
+        extFAB.setVisibility(View.VISIBLE);
+
+        extFAB.extend();
 
         FragGlobal = new Usuario();
         transaccionFragment=adminFragment.beginTransaction();
@@ -195,7 +219,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void toFavoritos() {
         bottom.setVisibility(View.GONE);
-        FAB.setVisibility(View.GONE);
+        extFAB.setVisibility(View.GONE);
 
         FragGlobal = new Favoritos();
         transaccionFragment=adminFragment.beginTransaction();
@@ -206,7 +230,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void toEditarPerfil() {
         bottom.setVisibility(View.GONE);
-        FAB.setVisibility(View.GONE);
+        extFAB.setVisibility(View.GONE);
 
         FragGlobal = new EditarPerfil();
         transaccionFragment=adminFragment.beginTransaction();
@@ -218,10 +242,10 @@ public class MainActivity extends AppCompatActivity {
     public void toBases(Boolean train) {
         if(train){
             bottom.setVisibility(View.GONE);
-            FAB.setVisibility(View.GONE);
+            extFAB.setVisibility(View.GONE);
         } else {
             bottom.setVisibility(View.VISIBLE);
-            FAB.setVisibility(View.VISIBLE);
+            extFAB.setVisibility(View.VISIBLE);
             setBasesFAB();
         }
 
@@ -230,17 +254,23 @@ public class MainActivity extends AppCompatActivity {
         args.putBoolean("train", train);
         FragGlobal.setArguments(args);
 
+        extFAB.extend();
+
         transaccionFragment=adminFragment.beginTransaction();
         transaccionFragment.replace(R.id.frameLayout, FragGlobal,null);
         transaccionFragment.addToBackStack(null);
         transaccionFragment.commit();
     }
 
-    public void toModo() {
+    public void toModo(boolean desdehome) {
         bottom.setVisibility(View.GONE);
-        FAB.setVisibility(View.GONE);
+        extFAB.setVisibility(View.GONE);
 
         FragGlobal = new Modo();
+        Bundle args = new Bundle();
+        args.putBoolean("desdehome", desdehome);
+        FragGlobal.setArguments(args);
+
         transaccionFragment=adminFragment.beginTransaction();
         transaccionFragment.replace(R.id.frameLayout, FragGlobal,null);
         transaccionFragment.addToBackStack(null);
@@ -270,6 +300,8 @@ public class MainActivity extends AppCompatActivity {
         transaccionFragment.addToBackStack(null);
         transaccionFragment.commit();
     }
+
+
 
 
 }

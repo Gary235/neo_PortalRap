@@ -1,141 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     >
 
-
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appbar_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        >
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_usuario"
-            style="@android:style/Widget.Material.Toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/white"
-            android:elevation="5dp"
-            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-            app:titleTextColor="@color/black"
-
-            app:menu="@menu/ayuda_menu"
-            app:titleTextAppearance="@style/titlefont_2"
-            app:title="Gary Berkman"
-
-            app:layout_scrollFlags="scroll|enterAlways"
-
-
-            />
-
-        <com.makeramen.roundedimageview.RoundedImageView
-            android:id="@+id/img_Usuario"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:adjustViewBounds="true"
-            android:elevation="5dp"
-
-            android:scaleType="centerCrop"
-            android:src="@drawable/foto"
-            app:riv_corner_radius="50dp"
-
-            android:layout_gravity="top|center"
-            android:layout_marginTop="20dp"
-            app:layout_scrollFlags="scroll|enterAlways"
-
-            />
-
-        <ImageButton
-            android:id="@+id/btn_editar_perfil"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-
-            android:layout_gravity="top|center"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/redondeado_violeta"
-
-            android:layout_marginTop="-15dp"
-            android:elevation="10dp"
-            android:src="@drawable/ic_editar"
-            app:layout_scrollFlags="scroll|enterAlways"
-
-           />
-
-        <Button
-            android:id="@+id/btn_Favoritos"
-            android:layout_width="150dp"
-            android:layout_height="40dp"
-
-            android:layout_gravity="top|center"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="40dp"
-
-            android:background="@drawable/redondeado_violeta"
-            android:fontFamily="@font/montserrat_semibold"
-            android:text="Favoritos"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="16dp"
-
-            />
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            >
-
-
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/viewpager_usuario"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-
-                android:layout_marginTop="220dp"
-                android:layout_marginBottom="72dp"
-                >
-
-
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/tab_layout_usuario"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    app:tabIndicatorColor="@color/violeta_claro"
-
-                    app:tabIconTint="@color/tab_item_icon"
-                    app:tabTextColor="@color/tab_item_text"
-
-                    />
-
-
-            </androidx.viewpager.widget.ViewPager>
-
-
-
-
-
-            <!--<androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:id="@+id/lst_prueba"
-
-                android:layout_marginBottom="10dp"
-
-                tools:ignore="MissingConstraints" />
--->
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:text="volver con efecto"
+        android:id="@+id/btnprueba"
+        />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

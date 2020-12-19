@@ -6,6 +6,7 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -73,7 +74,7 @@ public class Bases extends Fragment {
         {
             case android.R.id.home:
                 MainActivity mainActivity = (MainActivity) getActivity();
-                mainActivity.toHome();
+                mainActivity.toHome(true);
                 break;
             case R.id.ayuda_bases:
                 AlertDialog.Builder mensaje;
@@ -97,6 +98,15 @@ public class Bases extends Fragment {
         boolean train = args.getBoolean("train");
 
         View v = inflater.inflate(R.layout.fragment_bases, container, false);
+
+        final Handler handler = new Handler();
+        handler.postDelayed(() -> {
+
+            MainActivity.extFAB.shrink();
+        }, 2000);
+
+
+
         toolbar= v.findViewById(R.id.toolbar_bases);
         setHasOptionsMenu(true);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
@@ -152,10 +162,10 @@ public class Bases extends Fragment {
                 @Override
                 public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                     if(dy > 0){
-                        MainActivity.FAB.hide();
+                        MainActivity.extFAB.hide();
                         MainActivity.bottom.setVisibility(View.GONE);
                     } else{
-                        MainActivity.FAB.show();
+                        MainActivity.extFAB.show();
                         MainActivity.bottom.setVisibility(View.VISIBLE);
                     }
 

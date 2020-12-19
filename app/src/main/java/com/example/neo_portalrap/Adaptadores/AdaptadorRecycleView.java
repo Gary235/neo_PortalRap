@@ -36,7 +36,7 @@ public class AdaptadorRecycleView extends RecyclerView.Adapter<AdaptadorRecycleV
                                                                 int viewType) {
         // create a new view
         TextView v = (TextView) LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.layout_prueba, parent, false);
+                .inflate(R.layout.layout_item, parent, false);
 
         MyViewHolder vh = new MyViewHolder(v);
         return vh;
