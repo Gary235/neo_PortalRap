@@ -254,7 +254,6 @@ public class MainActivity extends AppCompatActivity {
         args.putBoolean("train", train);
         FragGlobal.setArguments(args);
 
-        extFAB.extend();
 
         transaccionFragment=adminFragment.beginTransaction();
         transaccionFragment.replace(R.id.frameLayout, FragGlobal,null);

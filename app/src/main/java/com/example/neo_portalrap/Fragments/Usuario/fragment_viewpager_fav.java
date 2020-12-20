@@ -27,7 +27,6 @@ public class fragment_viewpager_fav extends Fragment {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
-    ArrayList<Integer> arrayList = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -50,7 +49,7 @@ public class fragment_viewpager_fav extends Fragment {
         int num_object = args.getInt(ARG_OBJECT);
         Log.d("VER" , "Object: " + num_object);
 
-        layoutManager = new LinearLayoutManager(getActivity());
+        /*layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
 
 
@@ -77,7 +76,7 @@ public class fragment_viewpager_fav extends Fragment {
 
         mAdapter = new AdaptadorRecycleView(arrayList);
         recyclerView.setAdapter(mAdapter);
-
+*/
 
     }
 }

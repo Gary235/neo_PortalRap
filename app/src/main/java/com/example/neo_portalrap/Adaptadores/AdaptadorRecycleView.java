@@ -1,57 +1,71 @@
 package com.example.neo_portalrap.Adaptadores;
 
+import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.neo_portalrap.Clases.Base;
 import com.example.neo_portalrap.R;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
 
 public class AdaptadorRecycleView extends RecyclerView.Adapter<AdaptadorRecycleView.MyViewHolder> {
-    ArrayList<Integer> mDataset;
+    ArrayList<Base> mDataset;
+    Context miContexto;
 
-    // Provide a reference to the views for each data item
-    // Complex data items may need more than one view per item, and
-    // you provide access to all the views for a data item in a view holder
+    public AdaptadorRecycleView(ArrayList<Base> myDataset, Context context) {
+        this.mDataset = myDataset;
+        this.miContexto = context;
+    }
+
+
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
-        public TextView textView;
-        public MyViewHolder(TextView v) {
+        TextView nombre, artista, duracion;
+        RoundedImageView imagen;
+        ImageButton play, fav;
+
+        public MyViewHolder(View v) {
             super(v);
-            textView = v;
+            nombre = v.findViewById(R.id.txt_nombre_base);
+            artista = v.findViewById(R.id.txt_artista_base);
+            duracion = v.findViewById(R.id.txt_duracion_base);
+            play = v.findViewById(R.id.btn_play_base);
+            fav = v.findViewById(R.id.btn_fav_base);
+            imagen = v.findViewById(R.id.img_base);
+
         }
     }
 
-    // Provide a suitable constructor (depends on the kind of dataset)
-    public AdaptadorRecycleView(ArrayList<Integer> myDataset) {
-        mDataset = myDataset;
-    }
-
-    // Create new views (invoked by the layout manager)
     @Override
     public AdaptadorRecycleView.MyViewHolder onCreateViewHolder(ViewGroup parent,
                                                                 int viewType) {
-        // create a new view
-        TextView v = (TextView) LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.layout_item, parent, false);
+
+        View v =  LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_recycler, parent, false);
 
         MyViewHolder vh = new MyViewHolder(v);
+
         return vh;
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        // - get element from your dataset at this position
-        // - replace the contents of the view with that element
-        holder.textView.setText("" + mDataset.get(position));
 
+        holder.artista.setText(mDataset.get(position).getArtista());
+        holder.duracion.setText(mDataset.get(position).getDuracion());
+        holder.nombre.setText(mDataset.get(position).getNombre());
+        holder.play.setImageResource(R.drawable.ic_play);
+        holder.fav.setImageResource(R.drawable.ic_corazon_vacio);
+
+        holder.imagen.setImageResource(R.drawable.foto);
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
         return mDataset.size();

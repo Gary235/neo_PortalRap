@@ -30,8 +30,6 @@ public class fragment_viewpager_usuario extends Fragment {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
-    ArrayList<Integer> arrayList = new ArrayList<>();
-
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -57,7 +55,7 @@ public class fragment_viewpager_usuario extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
 
-        if(num_object == 1){
+       /* if(num_object == 1){
             //grabaciones usuario / TODAS
             for (int i = 0; i < 120; i++){
                 arrayList.add(i);
@@ -91,6 +89,6 @@ public class fragment_viewpager_usuario extends Fragment {
 
         mAdapter = new AdaptadorRecycleView(arrayList);
         recyclerView.setAdapter(mAdapter);
-
+*/
     }
 }

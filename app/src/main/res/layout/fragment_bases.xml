@@ -75,6 +75,11 @@
 
             android:layout_marginVertical="10dp"
             android:layout_marginHorizontal="20dp"
+
+            android:scrollbars="none"
+            android:layout_gravity="center_vertical"
+
+
             />
 
 

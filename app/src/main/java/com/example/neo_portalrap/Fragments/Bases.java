@@ -2,34 +2,41 @@ package com.example.neo_portalrap.Fragments;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
 
-import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.MenuItemCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.example.neo_portalrap.Adaptadores.AdaptadorRecycleView;
+import com.example.neo_portalrap.Clases.Base;
 import com.example.neo_portalrap.MainActivity;
 import com.example.neo_portalrap.R;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
@@ -41,28 +48,51 @@ public class Bases extends Fragment {
     ImageButton btnSiguiente, btnAnterior;
     TextView txt_paso4;
 
-    ListView listaBases;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
+    private RecyclerView.Adapter searchAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
-    ArrayList<Integer> arrayList = new ArrayList<>();
-    ArrayAdapter<Integer> arrayAdapter;
+    ArrayList<Base> arrBases = new ArrayList<>();
+    ArrayList<Base> arrBusqueda = new ArrayList<>();
+
+    FirebaseFirestore db;
+
+    int textlength = 0;
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.bases_menu, menu);
         //FUNCION BUSQUEDA DE BEATS
 
-        SearchManager searchManager =
-                (SearchManager) ((AppCompatActivity)getActivity()).getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView =
-                (SearchView) menu.findItem(R.id.buscar_bases).getActionView();
-        searchView.setSearchableInfo(
-                searchManager.getSearchableInfo(((AppCompatActivity)getActivity()).getComponentName()));
-        searchView.setQueryHint("Ej: demon");
+        final MenuItem searchItem = menu.findItem(R.id.buscar_bases);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        searchView.setQueryHint("Ej: Abandoned");
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
 
 
+                return true;
+            }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                textlength = newText.length();
+                arrBusqueda.clear();
+                recyclerView.setAdapter(null);
+                for (int i = 0; i < arrBases.size(); i++) {
+                    if (textlength <= arrBases.get(i).getNombre().length()) {
+                        if (arrBases.get(i).getNombre().toLowerCase().contains(newText.toString().toLowerCase()) || arrBases.get(i).getArtista().toLowerCase().contains(newText.toLowerCase())) {
+                            arrBusqueda.add(arrBases.get(i));
+                        }
+                    }
+                }
+                searchAdapter = new AdaptadorRecycleView(arrBusqueda,getActivity());
+                recyclerView.setAdapter(searchAdapter);
+                return true;
+            }
+        });
 
 
         super.onCreateOptionsMenu(menu,inflater);
@@ -90,6 +120,13 @@ public class Bases extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        db = FirebaseFirestore.getInstance();
+        obtenerListaBases();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -98,13 +135,6 @@ public class Bases extends Fragment {
         boolean train = args.getBoolean("train");
 
         View v = inflater.inflate(R.layout.fragment_bases, container, false);
-
-        final Handler handler = new Handler();
-        handler.postDelayed(() -> {
-
-            MainActivity.extFAB.shrink();
-        }, 2000);
-
 
 
         toolbar= v.findViewById(R.id.toolbar_bases);
@@ -119,7 +149,7 @@ public class Bases extends Fragment {
         recyclerView = (RecyclerView) v.findViewById(R.id.recy_bases);
         recyclerView.setHasFixedSize(true);
 
-        layoutManager = new LinearLayoutManager(getActivity());
+        layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
         if(train){
@@ -175,19 +205,34 @@ public class Bases extends Fragment {
 
         }
 
-
-        for(int i = 0 ; i < 58; i++){
-            arrayList.add(i);
-        }
-
-
-        mAdapter = new AdaptadorRecycleView(arrayList);
-        recyclerView.setAdapter(mAdapter);
-
-
-
-
-
         return v;
     }
+
+
+    private void obtenerListaBases() {
+
+        ProgressDialog progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setTitle("Cargando Bases");
+        progressDialog.show();
+
+        db.collection("Bases")
+                .orderBy("nombre")
+                .addSnapshotListener((snapshots, e) -> {
+                    arrBases.clear();
+                    recyclerView.setAdapter(null);
+                    assert snapshots != null;
+                    for (DocumentSnapshot document : snapshots) {
+                        Base beat = document.toObject(Base.class);
+                        assert beat != null;
+                        beat.setId(document.getId());
+                        arrBases.add(beat);
+                    }
+
+                    progressDialog.dismiss();
+                    mAdapter = new AdaptadorRecycleView(arrBases, getActivity());
+                    recyclerView.setAdapter(mAdapter);
+
+                });
+    }
+
 }
