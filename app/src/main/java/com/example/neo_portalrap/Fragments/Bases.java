@@ -17,12 +17,11 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -31,65 +30,51 @@ import com.example.neo_portalrap.Adaptadores.AdaptadorRecycleView;
 import com.example.neo_portalrap.Clases.Base;
 import com.example.neo_portalrap.MainActivity;
 import com.example.neo_portalrap.R;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QuerySnapshot;
+
 
 import java.util.ArrayList;
 
 
 public class Bases extends Fragment {
 
-    Toolbar toolbar;
+    androidx.appcompat.widget.Toolbar toolbar;
     ImageView img_paso4;
     ImageButton btnSiguiente, btnAnterior;
     TextView txt_paso4;
 
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.Adapter searchAdapter;
+    private AdaptadorRecycleView mAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
     ArrayList<Base> arrBases = new ArrayList<>();
-    ArrayList<Base> arrBusqueda = new ArrayList<>();
 
     FirebaseFirestore db;
-
-    int textlength = 0;
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.bases_menu, menu);
         //FUNCION BUSQUEDA DE BEATS
 
-        final MenuItem searchItem = menu.findItem(R.id.buscar_bases);
-        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+         MenuItem searchItem = menu.findItem(R.id.buscar_bases);
+        androidx.appcompat.widget.SearchView searchView = (androidx.appcompat.widget.SearchView) MenuItemCompat.getActionView(searchItem);
         searchView.setQueryHint("Ej: Abandoned");
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        searchView.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-
+                mAdapter.filter(query);
+                mAdapter.notifyDataSetChanged();
 
                 return true;
             }
             @Override
             public boolean onQueryTextChange(String newText) {
-                textlength = newText.length();
-                arrBusqueda.clear();
-                recyclerView.setAdapter(null);
-                for (int i = 0; i < arrBases.size(); i++) {
-                    if (textlength <= arrBases.get(i).getNombre().length()) {
-                        if (arrBases.get(i).getNombre().toLowerCase().contains(newText.toString().toLowerCase()) || arrBases.get(i).getArtista().toLowerCase().contains(newText.toLowerCase())) {
-                            arrBusqueda.add(arrBases.get(i));
-                        }
-                    }
-                }
-                searchAdapter = new AdaptadorRecycleView(arrBusqueda,getActivity());
-                recyclerView.setAdapter(searchAdapter);
+                mAdapter.filter(newText);
+                mAdapter.notifyDataSetChanged();
+
+
                 return true;
             }
         });
@@ -137,7 +122,7 @@ public class Bases extends Fragment {
         View v = inflater.inflate(R.layout.fragment_bases, container, false);
 
 
-        toolbar= v.findViewById(R.id.toolbar_bases);
+        toolbar = v.findViewById(R.id.toolbar_bases);
         setHasOptionsMenu(true);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
 

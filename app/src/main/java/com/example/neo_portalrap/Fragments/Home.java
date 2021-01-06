@@ -20,9 +20,9 @@ import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
 
 import com.example.neo_portalrap.MainActivity;
@@ -31,7 +31,7 @@ import com.example.neo_portalrap.R;
 
 public class Home extends Fragment {
 
-    Toolbar toolbar;
+    androidx.appcompat.widget.Toolbar toolbar;
     Button btnPrueba;
 
     @Override
@@ -96,7 +96,7 @@ public class Home extends Fragment {
         handler.postDelayed(() -> {
 
             MainActivity.extFAB.shrink();
-        }, 2000);
+        }, 4000);
 
         toolbar = v.findViewById(R.id.toolbar_home);
         setHasOptionsMenu(true);

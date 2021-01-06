@@ -71,7 +71,7 @@ public class Usuario extends Fragment  {
         handler.postDelayed(() -> {
 
             MainActivity.extFAB.shrink();
-        }, 2000);
+        }, 4000);
 
 
         btnEditar = v.findViewById(R.id.btn_editar_perfil);
