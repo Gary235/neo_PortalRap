@@ -1,18 +1,15 @@
 package com.example.neo_portalrap;
 
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.animation.Animator;
+
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewAnimationUtils;
 import android.view.WindowManager;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
@@ -20,30 +17,42 @@ import android.view.animation.DecelerateInterpolator;
 import android.view.animation.ScaleAnimation;
 
 import com.example.neo_portalrap.Fragments.Bases;
-import com.example.neo_portalrap.Fragments.Entrenamiento.Completado;
-import com.example.neo_portalrap.Fragments.Entrenamiento.Duracion;
-import com.example.neo_portalrap.Fragments.Entrenamiento.Frecuencia;
+import com.example.neo_portalrap.Fragments.Entrenamiento.viewEntrenamiento;
 import com.example.neo_portalrap.Fragments.Home;
-import com.example.neo_portalrap.Fragments.Entrenamiento.Modo;
 import com.example.neo_portalrap.Fragments.Usuario.EditarPerfil;
 import com.example.neo_portalrap.Fragments.Usuario.Favoritos;
 import com.example.neo_portalrap.Fragments.Usuario.Usuario;
 import com.example.neo_portalrap.Pruebas.prueba1;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static boolean recien_entro_home = true, recien_entro_usuario = true;
     FirebaseFirestore db;
     FragmentManager adminFragment;
     FragmentTransaction transaccionFragment;
     Fragment FragGlobal;
 
     public static BottomNavigationView bottom;
-    public static FloatingActionButton FAB;
     public static ExtendedFloatingActionButton extFAB;
+
+    public static int[] modo = {
+            0,
+            0,
+            0
+    };
+
+    public static int[] duracion = {
+            0,
+            0
+    };
+
+    public static int frecuencia;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
         extFAB.setVisibility(View.VISIBLE);
         extFAB.setOnClickListener(a -> {
-            toModo(true);
+            toEntrenamiento(true);
         });
 
 
@@ -87,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
 
         extFAB.setVisibility(View.VISIBLE);
         extFAB.setOnClickListener(a -> {
-            toModo(true);
+            toEntrenamiento(true);
         });
 
 
@@ -194,7 +203,9 @@ public class MainActivity extends AppCompatActivity {
         args.putBoolean("desdeentrenamiento", desdeentrenamiento);
         FragGlobal.setArguments(args);
 
-        extFAB.extend();
+        if (recien_entro_home){
+            extFAB.extend();
+        }
 
         transaccionFragment=adminFragment.beginTransaction();
         transaccionFragment.replace(R.id.frameLayout, FragGlobal,null);
@@ -206,7 +217,9 @@ public class MainActivity extends AppCompatActivity {
         bottom.setVisibility(View.VISIBLE);
         extFAB.setVisibility(View.VISIBLE);
 
-        extFAB.extend();
+        if (recien_entro_usuario){
+            extFAB.extend();
+        }
 
         FragGlobal = new Usuario();
         transaccionFragment=adminFragment.beginTransaction();
@@ -259,7 +272,7 @@ public class MainActivity extends AppCompatActivity {
         transaccionFragment.commit();
     }
 
-    public void toModo(boolean desdehome) {
+    /*public void toModo(boolean desdehome) {
         bottom.setVisibility(View.GONE);
         extFAB.setVisibility(View.GONE);
 
@@ -273,7 +286,6 @@ public class MainActivity extends AppCompatActivity {
         transaccionFragment.addToBackStack(null);
         transaccionFragment.commit();
     }
-
     public void toFrecuencia() {
         //FragGlobal = new Frecuencia();
         transaccionFragment=adminFragment.beginTransaction();
@@ -281,7 +293,6 @@ public class MainActivity extends AppCompatActivity {
         transaccionFragment.addToBackStack(null);
         transaccionFragment.commit();
     }
-
     public void toDuracion() {
         //FragGlobal = new Duracion();
         transaccionFragment=adminFragment.beginTransaction();
@@ -289,9 +300,25 @@ public class MainActivity extends AppCompatActivity {
         transaccionFragment.addToBackStack(null);
         transaccionFragment.commit();
     }
-
     public void toCompletado() {
         //FragGlobal = new Completado();
+        transaccionFragment=adminFragment.beginTransaction();
+        transaccionFragment.replace(R.id.frameLayout, FragGlobal,null);
+        transaccionFragment.addToBackStack(null);
+        transaccionFragment.commit();
+    }
+
+*/
+
+    public void toEntrenamiento(boolean desdehome) {
+        bottom.setVisibility(View.GONE);
+        extFAB.setVisibility(View.GONE);
+
+        FragGlobal = new viewEntrenamiento();
+        Bundle args = new Bundle();
+        args.putBoolean("desdehome", desdehome);
+        FragGlobal.setArguments(args);
+
         transaccionFragment=adminFragment.beginTransaction();
         transaccionFragment.replace(R.id.frameLayout, FragGlobal,null);
         transaccionFragment.addToBackStack(null);

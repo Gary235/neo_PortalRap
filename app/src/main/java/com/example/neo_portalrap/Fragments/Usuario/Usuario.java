@@ -67,12 +67,14 @@ public class Usuario extends Fragment  {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_usuario, container, false);
 
-        final Handler handler = new Handler();
-        handler.postDelayed(() -> {
+        if(MainActivity.recien_entro_usuario){
+            final Handler handler = new Handler();
+            handler.postDelayed(() -> {
 
-            MainActivity.extFAB.shrink();
-        }, 4000);
-
+                MainActivity.extFAB.shrink();
+            }, 4000);
+            MainActivity.recien_entro_usuario = false;
+        }
 
         btnEditar = v.findViewById(R.id.btn_editar_perfil);
         btnFav = v.findViewById(R.id.btn_Favoritos);

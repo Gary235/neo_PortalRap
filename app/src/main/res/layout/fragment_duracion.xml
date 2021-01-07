@@ -59,34 +59,4 @@
         />
 
 
-    <ImageButton
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:id="@+id/btn_anterior_duracion"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="20dp"
-        android:layout_marginBottom="100dp"
-
-        android:background="@drawable/redondeado_stroke_violeta"
-        android:src="@drawable/ic_flecha_izq"
-        android:elevation="5dp"
-        />
-
-    <ImageButton
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:id="@+id/btn_siguiente_duracion"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="100dp"
-
-        android:background="@drawable/redondeado_violeta"
-        android:src="@drawable/ic_flecha_der"
-        android:elevation="5dp"
-        />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

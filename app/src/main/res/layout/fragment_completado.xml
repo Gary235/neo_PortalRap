@@ -127,43 +127,6 @@
 
          />
 
-    <Button
-        android:layout_width="130dp"
-        android:layout_height="40dp"
-        android:id="@+id/btn_volver_completado"
-
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginLeft="20dp"
-        android:layout_marginBottom="40dp"
-
-        android:background="@drawable/redondeado_stroke_violeta"
-        android:text="Volver"
-        android:textAllCaps="false"
-        android:textColor="@color/violeta_claro"
-        android:textSize="15sp"
-        android:fontFamily="@font/montserrat_regular"
-
-        />
-
-    <Button
-        android:layout_width="130dp"
-        android:layout_height="40dp"
-        android:id="@+id/btn_entrenar_completado"
-
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="40dp"
-
-        android:background="@drawable/redondeado_violeta"
-        android:text="Entrenar"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="15sp"
-        android:fontFamily="@font/montserrat_semibold"
-
-        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

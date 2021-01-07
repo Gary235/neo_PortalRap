@@ -62,26 +62,6 @@ public class Duracion extends Fragment {
         setHasOptionsMenu(true);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
 
-        btnAnterior = v.findViewById(R.id.btn_anterior_duracion);
-        btnSiguiente = v.findViewById(R.id.btn_siguiente_duracion);
-
-
-        btnSiguiente.setOnClickListener(s ->  {
-
-            MainActivity mainActivity = (MainActivity) getActivity();
-            mainActivity.toBases(true);
-
-        });
-
-        btnAnterior.setOnClickListener(d ->  {
-
-            MainActivity mainActivity = (MainActivity) getActivity();
-            mainActivity.toFrecuencia();
-
-        });
-
-
-
 
         return v;
     }

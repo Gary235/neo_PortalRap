@@ -1,115 +1,67 @@
 package com.example.neo_portalrap.Fragments.Entrenamiento;
 
-import android.animation.Animator;
-import android.annotation.TargetApi;
-import android.app.AlertDialog;
-import android.os.Build;
+
+import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import com.example.neo_portalrap.Fragments.Home;
 import com.example.neo_portalrap.MainActivity;
 import com.example.neo_portalrap.R;
-
-import java.util.List;
 
 
 public class Modo extends Fragment {
 
-    androidx.appcompat.widget.Toolbar toolbar;
-    ImageButton btnSiguiente;
+    ImageView palabras, objetos, aleatorio;
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.ayuda_menu, menu);
-        super.onCreateOptionsMenu(menu,inflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                MainActivity mainActivity = (MainActivity) getActivity();
-                mainActivity.toHome(true);
-                break;
-            case R.id.home_ayuda:
-                AlertDialog.Builder mensaje;
-                mensaje = new AlertDialog.Builder(getActivity());
-                mensaje.setTitle("Modo");
-                mensaje.setMessage("hola");
-                mensaje.setPositiveButton("Ok",null);
-                mensaje.create();
-                mensaje.show();
-                break;
-
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-
+    @SuppressLint("ResourceType")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Bundle args = getArguments();
-        boolean desdehome = false;
-        if(args != null){
-            desdehome = args.getBoolean("desdehome");
-        }
-        MainActivity.bottom.setVisibility(View.GONE);
-        MainActivity.extFAB.setVisibility(View.GONE);
 
         View v = inflater.inflate(R.layout.fragment_modo, container, false);
 
+        objetos = v.findViewById(R.id.imgobjetos);
+        palabras = v.findViewById(R.id.imgpalabras);
+        aleatorio = v.findViewById(R.id.imgaleatorio);
 
+        objetos.setOnClickListener(a -> {
+            MainActivity.modo[0] = 1;
+            MainActivity.modo[1] = 0;
+            MainActivity.modo[2] = 0;
 
-        boolean finalDesdehome = desdehome;
-        v.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
-            @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-            @Override
-            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-                if (finalDesdehome){
-                    v.removeOnLayoutChangeListener(this);
-                    int cx = (int)MainActivity.extFAB.getX();
-                    int cy = (int)MainActivity.extFAB.getY();
-                    int width = v.getWidth();
-                    int height = v.getHeight();
+            objetos.setColorFilter(ContextCompat.getColor(getActivity(), R.color.teal_700), android.graphics.PorterDuff.Mode.MULTIPLY);
+            palabras.setColorFilter(ContextCompat.getColor(getActivity(), R.color.grey), android.graphics.PorterDuff.Mode.MULTIPLY);
+            aleatorio.setColorFilter(ContextCompat.getColor(getActivity(), R.color.grey), android.graphics.PorterDuff.Mode.MULTIPLY);
 
-
-                    float finalRadius = Math.max(width, height) / 2 + Math.max(width - cx, height - cy);
-                    Animator anim = ViewAnimationUtils.createCircularReveal(v, cx, cy, 0, finalRadius);
-                    //anim.setDuration(300);
-                    anim.start();
-                }
-
-
-            }
         });
 
+        palabras.setOnClickListener(a -> {
+            MainActivity.modo[0] = 0;
+            MainActivity.modo[1] = 1;
+            MainActivity.modo[2] = 0;
 
-        toolbar = v.findViewById(R.id.toolbar_modo);
-        setHasOptionsMenu(true);
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+            objetos.setColorFilter(ContextCompat.getColor(getActivity(), R.color.grey), android.graphics.PorterDuff.Mode.MULTIPLY);
+            palabras.setColorFilter(ContextCompat.getColor(getActivity(), R.color.violeta), android.graphics.PorterDuff.Mode.MULTIPLY);
+            aleatorio.setColorFilter(ContextCompat.getColor(getActivity(), R.color.grey), android.graphics.PorterDuff.Mode.MULTIPLY);
 
+        });
 
-        btnSiguiente = v.findViewById(R.id.btn_siguiente_modo);
+        aleatorio.setOnClickListener(a -> {
+            MainActivity.modo[0] = 0;
+            MainActivity.modo[1] = 0;
+            MainActivity.modo[2] = 1;
 
-        btnSiguiente.setOnClickListener(s ->  {
-
-            MainActivity mainActivity = (MainActivity) getActivity();
-            mainActivity.toFrecuencia();
-
+            objetos.setColorFilter(ContextCompat.getColor(getActivity(), R.color.grey), android.graphics.PorterDuff.Mode.MULTIPLY);
+            palabras.setColorFilter(ContextCompat.getColor(getActivity(), R.color.grey), android.graphics.PorterDuff.Mode.MULTIPLY);
+            aleatorio.setColorFilter(ContextCompat.getColor(getActivity(), R.color.violeta), android.graphics.PorterDuff.Mode.MULTIPLY);
         });
 
 

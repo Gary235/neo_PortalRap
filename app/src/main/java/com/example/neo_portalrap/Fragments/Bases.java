@@ -41,7 +41,6 @@ public class Bases extends Fragment {
 
     androidx.appcompat.widget.Toolbar toolbar;
     ImageView img_paso4;
-    ImageButton btnSiguiente, btnAnterior;
     TextView txt_paso4;
 
     private RecyclerView recyclerView;
@@ -57,7 +56,7 @@ public class Bases extends Fragment {
         inflater.inflate(R.menu.bases_menu, menu);
         //FUNCION BUSQUEDA DE BEATS
 
-         MenuItem searchItem = menu.findItem(R.id.buscar_bases);
+        MenuItem searchItem = menu.findItem(R.id.buscar_bases);
         androidx.appcompat.widget.SearchView searchView = (androidx.appcompat.widget.SearchView) MenuItemCompat.getActionView(searchItem);
         searchView.setQueryHint("Ej: Abandoned");
 
@@ -126,8 +125,6 @@ public class Bases extends Fragment {
         setHasOptionsMenu(true);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
 
-        btnAnterior = v.findViewById(R.id.btn_anterior_bases);
-        btnSiguiente = v.findViewById(R.id.btn_siguiente_bases);
         img_paso4 = v.findViewById(R.id.img_paso4);
         txt_paso4 = v.findViewById(R.id.txt_paso4);
 
@@ -141,35 +138,10 @@ public class Bases extends Fragment {
             toolbar.setNavigationIcon(R.drawable.ic_cruz_negra);
             toolbar.setElevation(0);
 
-            btnAnterior.setOnClickListener(a -> {
-                MainActivity mainActivity = (MainActivity) getActivity();
-                mainActivity.toDuracion();
 
-            });
-            btnSiguiente.setOnClickListener(a -> {
-                MainActivity mainActivity = (MainActivity) getActivity();
-                mainActivity.toCompletado();
-            });
-
-            recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-                @Override
-                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                    if(dy > 0){
-                        btnAnterior.setVisibility(View.GONE);
-                        btnSiguiente.setVisibility(View.GONE);
-                    } else{
-                        btnAnterior.setVisibility(View.VISIBLE);
-                        btnSiguiente.setVisibility(View.VISIBLE);
-
-                    }
-
-                    super.onScrolled(recyclerView, dx, dy);
-                }
-            });
         }
         else {
-            btnSiguiente.setVisibility(View.GONE);
-            btnAnterior.setVisibility(View.GONE);
+
             txt_paso4.setVisibility(View.GONE);
             img_paso4.setVisibility(View.GONE);
 

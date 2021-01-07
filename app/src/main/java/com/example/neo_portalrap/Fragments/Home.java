@@ -92,11 +92,15 @@ public class Home extends Fragment {
             }
         });
 
-        final Handler handler = new Handler();
-        handler.postDelayed(() -> {
+        if(MainActivity.recien_entro_home){
+            final Handler handler = new Handler();
+            handler.postDelayed(() -> {
 
-            MainActivity.extFAB.shrink();
-        }, 4000);
+                MainActivity.extFAB.shrink();
+            }, 4000);
+            MainActivity.recien_entro_home = false;
+        }
+
 
         toolbar = v.findViewById(R.id.toolbar_home);
         setHasOptionsMenu(true);

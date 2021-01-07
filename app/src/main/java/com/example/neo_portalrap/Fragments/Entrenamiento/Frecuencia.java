@@ -21,7 +21,6 @@ import com.example.neo_portalrap.R;
 public class Frecuencia extends Fragment {
 
     androidx.appcompat.widget.Toolbar toolbar;
-    ImageButton btnSiguiente, btnAnterior;
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -61,23 +60,6 @@ public class Frecuencia extends Fragment {
         setHasOptionsMenu(true);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
 
-        btnAnterior = v.findViewById(R.id.btn_anterior_frecuencia);
-        btnSiguiente = v.findViewById(R.id.btn_siguiente_frecuencia);
-
-
-        btnSiguiente.setOnClickListener(s ->  {
-
-            MainActivity mainActivity = (MainActivity) getActivity();
-            mainActivity.toDuracion();
-
-        });
-
-        btnAnterior.setOnClickListener(d ->  {
-
-            MainActivity mainActivity = (MainActivity) getActivity();
-            mainActivity.toModo(false);
-
-        });
 
 
         return v;
