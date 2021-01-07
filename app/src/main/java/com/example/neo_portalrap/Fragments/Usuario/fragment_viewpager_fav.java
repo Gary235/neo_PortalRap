@@ -9,13 +9,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.neo_portalrap.Adaptadores.AdaptadorRecycleView;
 import com.example.neo_portalrap.R;
-
-import java.util.ArrayList;
 
 
 public class fragment_viewpager_fav extends Fragment {
@@ -31,7 +27,7 @@ public class fragment_viewpager_fav extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_mis_bases, container, false);
+        View v = inflater.inflate(R.layout.fragment_recycler, container, false);
 
         recyclerView = (RecyclerView) v.findViewById(R.id.recy_bases_grab);
 

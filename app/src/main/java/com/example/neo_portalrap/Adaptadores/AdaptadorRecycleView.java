@@ -101,9 +101,6 @@ public class AdaptadorRecycleView extends RecyclerView.Adapter<AdaptadorRecycleV
         holder.play.setImageResource(R.drawable.ic_play);
         holder.fav.setImageResource(R.drawable.ic_corazon_vacio);
 
-        //holder.imagen.setImageResource(R.drawable.foto);
-        //new DownloadImages().execute(arrImagenes);
-
         StorageReference mStorage = FirebaseStorage.getInstance().getReference();
         mStorage.child("info_bases/imagenes/" + mDataset.get(position).getImagen())
                 .getDownloadUrl()
@@ -142,35 +139,5 @@ public class AdaptadorRecycleView extends RecyclerView.Adapter<AdaptadorRecycleV
         notifyDataSetChanged();
     }
 
-    public class DownloadImages extends AsyncTask<Integer, Void, Bitmap> {
-
-        protected Bitmap doInBackground(Integer... urls) {
-
-            final Bitmap[] bitmap = new Bitmap[1];
-            StorageReference storageReference = FirebaseStorage.getInstance().getReference();
-
-            storageReference.child("info_bases/imagenes/" + urls + ".jpg").getDownloadUrl()
-                    .addOnSuccessListener(uri -> {
-                    // Got the download URL for 'users/me/profile.png'
-                    try {
-                        bitmap[0] = MediaStore.Images.Media.getBitmap(miContexto.getContentResolver(), uri);
-                    } catch (IOException exception) {
-                        exception.printStackTrace();
-                    }
-            })
-                    .addOnFailureListener(exception -> {
-                // Handle any errors
-            });
-
-
-            return bitmap[0];
-        }
-
-        protected void onPostExecute(Bitmap result) {
-
-            vh.imagen.setImageBitmap(result);
-
-        }
-    }
 
 }

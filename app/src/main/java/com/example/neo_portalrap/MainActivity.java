@@ -67,8 +67,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void setUserFAB(){
-
-
         extFAB.setVisibility(View.VISIBLE);
         extFAB.setOnClickListener(a -> {
 
@@ -176,12 +174,12 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void toPrueba() {
-        bottom.setVisibility(View.VISIBLE);
-        extFAB.setVisibility(View.VISIBLE);
+        //bottom.setVisibility(View.VISIBLE);
+        //extFAB.setVisibility(View.VISIBLE);
 
 
         FragGlobal = new prueba1();
-        transaccionFragment=adminFragment.beginTransaction();
+        transaccionFragment = adminFragment.beginTransaction();
         transaccionFragment.replace(R.id.frameLayout, FragGlobal,null);
         transaccionFragment.addToBackStack(null);
         transaccionFragment.commit();
@@ -265,7 +263,7 @@ public class MainActivity extends AppCompatActivity {
         bottom.setVisibility(View.GONE);
         extFAB.setVisibility(View.GONE);
 
-        FragGlobal = new Modo();
+        //FragGlobal = new Modo();
         Bundle args = new Bundle();
         args.putBoolean("desdehome", desdehome);
         FragGlobal.setArguments(args);
@@ -277,7 +275,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void toFrecuencia() {
-        FragGlobal = new Frecuencia();
+        //FragGlobal = new Frecuencia();
         transaccionFragment=adminFragment.beginTransaction();
         transaccionFragment.replace(R.id.frameLayout, FragGlobal,null);
         transaccionFragment.addToBackStack(null);
@@ -285,7 +283,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void toDuracion() {
-        FragGlobal = new Duracion();
+        //FragGlobal = new Duracion();
         transaccionFragment=adminFragment.beginTransaction();
         transaccionFragment.replace(R.id.frameLayout, FragGlobal,null);
         transaccionFragment.addToBackStack(null);
@@ -293,7 +291,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void toCompletado() {
-        FragGlobal = new Completado();
+        //FragGlobal = new Completado();
         transaccionFragment=adminFragment.beginTransaction();
         transaccionFragment.replace(R.id.frameLayout, FragGlobal,null);
         transaccionFragment.addToBackStack(null);
