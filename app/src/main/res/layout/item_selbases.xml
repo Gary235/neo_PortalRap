@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:layout_width="100dp"
+        android:layout_height="45dp"
+        android:id="@+id/itemselbase_foto"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="20dp"
+
+        android:adjustViewBounds="true"
+        app:riv_corner_radius="10dp"
+        android:src="@drawable/foto"
+        android:scaleType="centerCrop"
+
+        />
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:layout_width="100dp"
+        android:layout_height="45dp"
+
+        app:layout_constraintTop_toTopOf="@id/itemselbase_foto"
+        app:layout_constraintBottom_toBottomOf="@id/itemselbase_foto"
+        app:layout_constraintLeft_toLeftOf="@id/itemselbase_foto"
+        app:layout_constraintRight_toRightOf="@id/itemselbase_foto"
+
+        android:adjustViewBounds="true"
+        app:riv_corner_radius="10dp"
+        android:src="@drawable/negro"
+
+        android:alpha="0.3"
+        android:translationZ="1dp"
+        android:scaleType="centerCrop"
+
+        />
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:id="@+id/itemselbase_imgplay"
+
+        app:layout_constraintTop_toTopOf="@id/itemselbase_foto"
+        app:layout_constraintBottom_toBottomOf="@id/itemselbase_foto"
+        app:layout_constraintLeft_toLeftOf="@id/itemselbase_foto"
+        app:layout_constraintRight_toRightOf="@id/itemselbase_foto"
+        android:translationZ="2dp"
+
+        android:src="@drawable/ic_play"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/itemselbase_nombre"
+
+        app:layout_constraintTop_toTopOf="@id/itemselbase_foto"
+        app:layout_constraintLeft_toRightOf="@id/itemselbase_foto"
+        android:layout_marginLeft="20dp"
+
+        android:text="Pumkin Spice"
+        android:textColor="@color/black"
+        android:fontFamily="@font/montserrat_semibold"
+        android:textSize="15sp"
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/itemselbase_artista"
+
+        app:layout_constraintBottom_toBottomOf="@id/itemselbase_foto"
+        app:layout_constraintLeft_toLeftOf="@id/itemselbase_nombre"
+        android:text="SK"
+        android:textColor="@color/black"
+        android:fontFamily="@font/montserrat_light"
+        android:textSize="12sp"
+        />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/itemselbase_duracion"
+
+        app:layout_constraintBottom_toBottomOf="@id/itemselbase_foto"
+        app:layout_constraintLeft_toLeftOf="@id/itemselbase_nombre"
+        android:layout_marginLeft="150dp"
+
+        android:text="3:21"
+        android:textColor="@color/black"
+        android:fontFamily="@font/montserrat_light"
+        android:textSize="12sp"
+        />
+
+    <CheckBox
+        android:id="@+id/itemselbase_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:buttonTint="@color/black"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+         />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

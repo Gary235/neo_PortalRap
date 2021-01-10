@@ -3,6 +3,7 @@ package com.example.neo_portalrap.Fragments.Entrenamiento;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import android.view.LayoutInflater;
@@ -32,36 +33,41 @@ public class Modo extends Fragment {
         palabras = v.findViewById(R.id.imgpalabras);
         aleatorio = v.findViewById(R.id.imgaleatorio);
 
+
+        switch (MainActivity.modo){
+            case 0:
+                objetos.setBackgroundResource(R.drawable.redondeado_violeta);
+                break;
+            case 1:
+                palabras.setBackgroundResource(R.drawable.redondeado_violeta);
+                break;
+            case 2:
+                aleatorio.setBackgroundResource(R.drawable.redondeado_violeta);
+                break;
+        }
+
+
         objetos.setOnClickListener(a -> {
-            MainActivity.modo[0] = 1;
-            MainActivity.modo[1] = 0;
-            MainActivity.modo[2] = 0;
+            MainActivity.modo = 0;
 
-            objetos.setColorFilter(ContextCompat.getColor(getActivity(), R.color.teal_700), android.graphics.PorterDuff.Mode.MULTIPLY);
-            palabras.setColorFilter(ContextCompat.getColor(getActivity(), R.color.grey), android.graphics.PorterDuff.Mode.MULTIPLY);
-            aleatorio.setColorFilter(ContextCompat.getColor(getActivity(), R.color.grey), android.graphics.PorterDuff.Mode.MULTIPLY);
-
+            objetos.setBackgroundResource(R.drawable.redondeado_violeta);
+            palabras.setBackgroundResource(R.drawable.redondeado_gris);
+            aleatorio.setBackgroundResource(R.drawable.redondeado_gris);
         });
-
         palabras.setOnClickListener(a -> {
-            MainActivity.modo[0] = 0;
-            MainActivity.modo[1] = 1;
-            MainActivity.modo[2] = 0;
+            MainActivity.modo = 1;
 
-            objetos.setColorFilter(ContextCompat.getColor(getActivity(), R.color.grey), android.graphics.PorterDuff.Mode.MULTIPLY);
-            palabras.setColorFilter(ContextCompat.getColor(getActivity(), R.color.violeta), android.graphics.PorterDuff.Mode.MULTIPLY);
-            aleatorio.setColorFilter(ContextCompat.getColor(getActivity(), R.color.grey), android.graphics.PorterDuff.Mode.MULTIPLY);
+            objetos.setBackgroundResource(R.drawable.redondeado_gris);
+            palabras.setBackgroundResource(R.drawable.redondeado_violeta);
+            aleatorio.setBackgroundResource(R.drawable.redondeado_gris);
 
         });
-
         aleatorio.setOnClickListener(a -> {
-            MainActivity.modo[0] = 0;
-            MainActivity.modo[1] = 0;
-            MainActivity.modo[2] = 1;
+            MainActivity.modo = 2;
 
-            objetos.setColorFilter(ContextCompat.getColor(getActivity(), R.color.grey), android.graphics.PorterDuff.Mode.MULTIPLY);
-            palabras.setColorFilter(ContextCompat.getColor(getActivity(), R.color.grey), android.graphics.PorterDuff.Mode.MULTIPLY);
-            aleatorio.setColorFilter(ContextCompat.getColor(getActivity(), R.color.violeta), android.graphics.PorterDuff.Mode.MULTIPLY);
+            objetos.setBackgroundResource(R.drawable.redondeado_gris);
+            palabras.setBackgroundResource(R.drawable.redondeado_gris);
+            aleatorio.setBackgroundResource(R.drawable.redondeado_violeta);
         });
 
 

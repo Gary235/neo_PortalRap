@@ -84,7 +84,7 @@ public class Home extends Fragment {
 
                     float finalRadius = Math.max(width, height) / 2 + Math.max(width - cx, height - cy);
                     Animator anim = ViewAnimationUtils.createCircularReveal(v, cx, cy, finalRadius, 0);
-                    anim.setDuration(300);
+                    //anim.setDuration(1000);
                     anim.start();
                 }
 

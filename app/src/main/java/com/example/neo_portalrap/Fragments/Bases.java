@@ -3,23 +3,14 @@ package com.example.neo_portalrap.Fragments;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.ProgressDialog;
-import android.app.SearchManager;
-import android.content.Context;
 import android.os.Bundle;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.SearchView;
-import android.widget.TextView;
-import android.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.MenuItemCompat;
@@ -40,9 +31,6 @@ import java.util.ArrayList;
 public class Bases extends Fragment {
 
     androidx.appcompat.widget.Toolbar toolbar;
-    ImageView img_paso4;
-    TextView txt_paso4;
-
     private RecyclerView recyclerView;
     private AdaptadorRecycleView mAdapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -125,8 +113,6 @@ public class Bases extends Fragment {
         setHasOptionsMenu(true);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
 
-        img_paso4 = v.findViewById(R.id.img_paso4);
-        txt_paso4 = v.findViewById(R.id.txt_paso4);
 
         recyclerView = (RecyclerView) v.findViewById(R.id.recy_bases);
         recyclerView.setHasFixedSize(true);
@@ -141,10 +127,6 @@ public class Bases extends Fragment {
 
         }
         else {
-
-            txt_paso4.setVisibility(View.GONE);
-            img_paso4.setVisibility(View.GONE);
-
             recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
                 @Override
                 public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -185,9 +167,9 @@ public class Bases extends Fragment {
                         arrBases.add(beat);
                     }
 
-                    progressDialog.dismiss();
                     mAdapter = new AdaptadorRecycleView(arrBases, getActivity());
                     recyclerView.setAdapter(mAdapter);
+                    progressDialog.dismiss();
 
                 });
     }

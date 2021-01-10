@@ -38,18 +38,14 @@ public class MainActivity extends AppCompatActivity {
     public static BottomNavigationView bottom;
     public static ExtendedFloatingActionButton extFAB;
 
-    public static int[] modo = {
-            0,
-            0,
-            0
-    };
+    public static int modo = -1;
 
     public static int[] duracion = {
-            0,
-            0
+            -1,
+            -1
     };
 
-    public static int frecuencia;
+    public static int frecuencia = -1;
 
 
 
@@ -272,43 +268,6 @@ public class MainActivity extends AppCompatActivity {
         transaccionFragment.commit();
     }
 
-    /*public void toModo(boolean desdehome) {
-        bottom.setVisibility(View.GONE);
-        extFAB.setVisibility(View.GONE);
-
-        //FragGlobal = new Modo();
-        Bundle args = new Bundle();
-        args.putBoolean("desdehome", desdehome);
-        FragGlobal.setArguments(args);
-
-        transaccionFragment=adminFragment.beginTransaction();
-        transaccionFragment.replace(R.id.frameLayout, FragGlobal,null);
-        transaccionFragment.addToBackStack(null);
-        transaccionFragment.commit();
-    }
-    public void toFrecuencia() {
-        //FragGlobal = new Frecuencia();
-        transaccionFragment=adminFragment.beginTransaction();
-        transaccionFragment.replace(R.id.frameLayout, FragGlobal,null);
-        transaccionFragment.addToBackStack(null);
-        transaccionFragment.commit();
-    }
-    public void toDuracion() {
-        //FragGlobal = new Duracion();
-        transaccionFragment=adminFragment.beginTransaction();
-        transaccionFragment.replace(R.id.frameLayout, FragGlobal,null);
-        transaccionFragment.addToBackStack(null);
-        transaccionFragment.commit();
-    }
-    public void toCompletado() {
-        //FragGlobal = new Completado();
-        transaccionFragment=adminFragment.beginTransaction();
-        transaccionFragment.replace(R.id.frameLayout, FragGlobal,null);
-        transaccionFragment.addToBackStack(null);
-        transaccionFragment.commit();
-    }
-
-*/
 
     public void toEntrenamiento(boolean desdehome) {
         bottom.setVisibility(View.GONE);

@@ -45,6 +45,12 @@ public class viewEntrenamiento extends android.app.Fragment {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
+                MainActivity.modo = -1;
+                MainActivity.frecuencia = -1;
+                MainActivity.duracion[0] = -1;
+                MainActivity.duracion[1] = -1;
+
+
                 MainActivity mainActivity = (MainActivity) getActivity();
                 mainActivity.toHome(true);
                 break;
@@ -68,7 +74,7 @@ public class viewEntrenamiento extends android.app.Fragment {
                              Bundle savedInstanceState) {
 
         Bundle args = getArguments();
-        boolean desdehome = false;
+        boolean desdehome = args.getBoolean("desdeentrenamiento");
 
         View v = inflater.inflate(R.layout.fragment_entrenamiento, container, false);
 
@@ -76,19 +82,18 @@ public class viewEntrenamiento extends android.app.Fragment {
             @TargetApi(Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-                if (desdehome){
                     v.removeOnLayoutChangeListener(this);
                     int cx = (int) MainActivity.extFAB.getX();
-                    int cy = (int)MainActivity.extFAB.getY();
+                    int cy = (int) MainActivity.extFAB.getY();
                     int width = v.getWidth();
                     int height = v.getHeight();
 
 
                     float finalRadius = Math.max(width, height) / 2 + Math.max(width - cx, height - cy);
                     Animator anim = ViewAnimationUtils.createCircularReveal(v, cx, cy, 0, finalRadius);
-                    //anim.setDuration(300);
+                    anim.setDuration(500);
                     anim.start();
-                }
+
             }
         });
 
@@ -127,7 +132,7 @@ public class viewEntrenamiento extends android.app.Fragment {
                 case 2:
                     return new Duracion();
                 case 3:
-                    return new Completado();
+                    return new SeleccionBases();
                 case 4:
                     return new Completado();
 
