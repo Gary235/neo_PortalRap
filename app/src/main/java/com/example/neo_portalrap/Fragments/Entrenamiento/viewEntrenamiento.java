@@ -49,7 +49,7 @@ public class viewEntrenamiento extends android.app.Fragment {
                 MainActivity.frecuencia = -1;
                 MainActivity.duracion[0] = -1;
                 MainActivity.duracion[1] = -1;
-
+                MainActivity.arrayListSeleccion.clear();
 
                 MainActivity mainActivity = (MainActivity) getActivity();
                 mainActivity.toHome(true);

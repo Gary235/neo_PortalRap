@@ -82,9 +82,11 @@ public class Favoritos extends Fragment {
         toolbar = v.findViewById(R.id.toolbar_fav);
         setHasOptionsMenu(true);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+
 
         return v;
     }

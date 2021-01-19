@@ -8,17 +8,19 @@ public class Base {
     private String imagen;
     private String nombre;
     private String url;
+    private Boolean seleccionado;
 
     public Base() {
     }
 
-    public Base(String id, String artista, String duracion, String imagen, String nombre, String url) {
+    public Base(String id, String artista, String duracion, String imagen, String nombre, String url, Boolean seleccionado) {
         this.id = id;
         this.artista = artista;
         this.duracion = duracion;
         this.imagen = imagen;
         this.nombre = nombre;
         this.url = url;
+        this.seleccionado = seleccionado;
     }
 
 
@@ -63,4 +65,7 @@ public class Base {
     public void setUrl(String url) {
         this.url = url;
     }
+
+    public Boolean getSeleccionado() { return seleccionado; }
+    public void setSeleccionado(Boolean seleccionado) { this.seleccionado = seleccionado; }
 }

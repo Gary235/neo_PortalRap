@@ -1,13 +1,18 @@
 package com.example.neo_portalrap;
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -16,6 +21,7 @@ import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.ScaleAnimation;
 
+import com.example.neo_portalrap.Clases.Base;
 import com.example.neo_portalrap.Fragments.Bases;
 import com.example.neo_portalrap.Fragments.Entrenamiento.viewEntrenamiento;
 import com.example.neo_portalrap.Fragments.Home;
@@ -26,6 +32,8 @@ import com.example.neo_portalrap.Pruebas.prueba1;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,17 +46,16 @@ public class MainActivity extends AppCompatActivity {
     public static BottomNavigationView bottom;
     public static ExtendedFloatingActionButton extFAB;
 
-    public static int modo = -1;
+    public static ArrayList<Base> arrayListSeleccion = new ArrayList<>();
 
+    public static int modo = -1;
     public static int[] duracion = {
             -1,
             -1
     };
-
     public static int frecuencia = -1;
 
-
-
+    public static Boolean permiso_internet = false, permiso_readstorage = false, permiso_writestorage = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +64,18 @@ public class MainActivity extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
         adminFragment = getFragmentManager();
+
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ||
+                ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED   ||
+                ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]{
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.INTERNET,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+            }, 1);
+        }
+
 
         bottom = findViewById(R.id.bottomnavigation);
         bottom.setOnNavigationItemSelectedListener(listenernav);
@@ -69,7 +88,21 @@ public class MainActivity extends AppCompatActivity {
         toHome(false);
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
+        if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
+            permiso_writestorage = true;
+
+        }   else if(grantResults[1] == PackageManager.PERMISSION_GRANTED){
+            permiso_internet = true;
+
+        }   else if(grantResults[2] == PackageManager.PERMISSION_GRANTED){
+            permiso_readstorage = true;
+
+        }
+    }
 
     public void setUserFAB(){
         extFAB.setVisibility(View.VISIBLE);

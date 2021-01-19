@@ -102,6 +102,77 @@ public class AdaptadorRecycleView extends RecyclerView.Adapter<AdaptadorRecycleV
                                     .into(holder.imagen);
                         });
 
+
+        if (encontrarBeat(mDataset.get(position).getUrl())){
+            holder.descargar.setImageResource(R.drawable.ic_descargado);
+        }   else {
+            holder.descargar.setImageResource(R.drawable.ic_descargar);
+        }
+        holder.descargar.setOnClickListener(a -> {
+
+            if (!encontrarBeat(mDataset.get(position).getUrl())){
+                if(isNetworkConnected){
+                holder.progress_descarga.setVisibility(View.VISIBLE);
+                StorageReference beatRef = mStorage.child("info_bases/bases/" + mDataset.get(position).getUrl());
+
+                path_file = Environment.getExternalStorageDirectory() + carpeta;
+                localFile = new File(path_file);
+
+                if (!localFile.exists()) {
+                    localFile.mkdirs();
+                }
+                file = new File(localFile,  mDataset.get(position).getUrl());
+
+                beatRef.getFile(file).addOnSuccessListener(taskSnapshot -> {
+                    // Local temp file has been created
+
+                    holder.descargar.setImageResource(R.drawable.ic_descargado);
+                    Toast.makeText(miContexto, "Beat Descargado con exito", Toast.LENGTH_LONG).show();
+                }).addOnFailureListener(exception -> {
+                    // Handle any errors
+                    Toast.makeText(miContexto, "Error en la descarga", Toast.LENGTH_LONG).show();
+
+                });
+                holder.progress_descarga.setVisibility(View.GONE);
+                }
+                else {
+                    Toast.makeText(miContexto, "Error de red", Toast.LENGTH_LONG).show();
+                }
+            }
+            else {
+                    // borrar beat
+                AlertDialog.Builder mensaje;
+                mensaje = new AlertDialog.Builder(miContexto);
+                mensaje.setTitle("Eliminar Base");
+                mensaje.setMessage(" \n Se borrara la base de tu almacenamiento, pero seguiras pudiendo escucharlo a traves de internet\n \n");
+                mensaje.setPositiveButton("Eliminar", (dialog, which) -> {
+                    holder.progress_descarga.setVisibility(View.VISIBLE);
+                    String path = Environment.getExternalStorageDirectory().toString() +
+                            "/neo portal rap/bases/" +
+                            mDataset.get(position).getUrl();
+
+                    File fileaeliminar = new File(path);
+                    boolean deleted = fileaeliminar.delete();
+                    if(deleted)
+                        Toast.makeText(miContexto, "Base Eliminada", Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(miContexto, "Error en la eliminación", Toast.LENGTH_SHORT).show();
+
+                    holder.descargar.setImageResource(R.drawable.ic_descargar);
+                    holder.progress_descarga.setVisibility(View.GONE);
+
+                });
+                mensaje.setNegativeButton("Cancelar", ((dialog, which) -> {
+                    dialog.cancel();
+                }));
+                mensaje.create();
+                mensaje.show();
+            }
+
+
+
+        });
+
     }
 
     @Override

@@ -15,7 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.neo_portalrap.Clases.Base;
+import com.example.neo_portalrap.MainActivity;
 import com.example.neo_portalrap.R;
+import com.google.android.material.progressindicator.CircularProgressIndicator;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.makeramen.roundedimageview.RoundedImageView;
@@ -30,6 +32,7 @@ public class AdapterSelBases extends RecyclerView.Adapter<AdapterSelBases.MyView
     public AdapterSelBases(Context micontexto, ArrayList<Base> arrayList) {
         this.micontexto = micontexto;
         this.arrayList = arrayList;
+
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
@@ -46,7 +49,6 @@ public class AdapterSelBases extends RecyclerView.Adapter<AdapterSelBases.MyView
             play = v.findViewById(R.id.itemselbase_imgplay);
             imagen = v.findViewById(R.id.itemselbase_foto);
             checkBox = v.findViewById(R.id.itemselbase_checkbox);
-
         }
     }
 
@@ -91,6 +93,16 @@ public class AdapterSelBases extends RecyclerView.Adapter<AdapterSelBases.MyView
                             .into(holder.imagen);
                 });
 
+
+        holder.checkBox.setChecked(arrayList.get(position).getSeleccionado());
+
+        holder.checkBox.setOnClickListener(a -> {
+            arrayList.get(position).setSeleccionado(!arrayList.get(position).getSeleccionado());
+        });
+
+        holder.imagen.setOnClickListener(a -> {
+
+        });
 
 
     }

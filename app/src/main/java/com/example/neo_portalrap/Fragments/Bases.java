@@ -5,12 +5,15 @@ import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 
+import android.os.Environment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.MenuItemCompat;
@@ -23,8 +26,10 @@ import com.example.neo_portalrap.MainActivity;
 import com.example.neo_portalrap.R;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.StorageReference;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -120,6 +125,67 @@ public class Bases extends Fragment {
         layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
+        recyclerView.setOnClickListener(a -> {
+               /* if (encontrarBeat(mDataset.get(position).getUrl())){
+                    //reproducir desde local
+                    if(counterReproduccion == 0){
+                        String path = Environment.getExternalStorageDirectory().toString() +
+                                "/neo portal rap/bases/" +
+                                mDataset.get(position).getUrl();
+
+                        try {
+                            mediaPlayer.setDataSource(path);
+                            mediaPlayer.prepare();
+                            mediaPlayer.start();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        counterReproduccion++;
+                    }
+                    else if (!mediaPlayer.isPlaying()){
+                        mediaPlayer.pause();
+                    } else {
+                        mediaPlayer.start();
+                    }
+                }
+                else {
+                    if(isNetworkConnected){
+                        //reproducir online
+
+                        if(counterReproduccion == 0){
+                            StorageReference storageRef = mStorage.child("info_bases/bases/" + mDataset.get(position).getUrl());
+                            storageRef.getDownloadUrl().addOnSuccessListener(uri -> {
+                                try {
+                                    // Download url of file
+                                    final String url = uri.toString();
+                                    mediaPlayer.setDataSource(url);
+                                    // wait for media player to get prepare
+                                    mediaPlayer.setOnPreparedListener(mp -> mp.start());
+                                    mediaPlayer.prepareAsync();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }).addOnFailureListener(e -> Log.i("TAG", e.getMessage()));
+
+                            counterReproduccion++;
+                        }
+                        else if (!mediaPlayer.isPlaying()){
+                            mediaPlayer.pause();
+                        } else {
+                            mediaPlayer.start();
+                        }
+
+                    }
+
+                    else {
+                        Toast.makeText(miContexto, "Error de red", Toast.LENGTH_LONG).show();
+                    }
+                }*/
+            });
+
+
+
         if(train){
             toolbar.setNavigationIcon(R.drawable.ic_cruz_negra);
             toolbar.setElevation(0);
@@ -167,7 +233,7 @@ public class Bases extends Fragment {
                         arrBases.add(beat);
                     }
 
-                    mAdapter = new AdaptadorRecycleView(arrBases, getActivity());
+                    mAdapter = new AdaptadorRecycleView(arrBases, getActivity(), "bases");
                     recyclerView.setAdapter(mAdapter);
                     progressDialog.dismiss();
 

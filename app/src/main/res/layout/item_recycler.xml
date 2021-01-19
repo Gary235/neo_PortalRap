@@ -35,7 +35,39 @@
         android:alpha="0.3"
         />
 
-    
+
+    <ImageView
+        android:id="@+id/descargar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginBottom="15dp"
+        android:elevation="3dp"
+        android:src="@drawable/ic_descargar"
+        app:layout_constraintBottom_toBottomOf="@id/img_base"
+
+        app:layout_constraintLeft_toLeftOf="@id/btn_fav_base"
+        app:layout_constraintRight_toRightOf="@id/btn_fav_base"
+        app:tint="@color/white" />
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/carga_descarga"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+
+        android:elevation="5dp"
+        android:indeterminate="true"
+        android:scaleX="0.5"
+        android:scaleY="0.5"
+
+        android:visibility="gone"
+        app:indicatorColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@id/descargar"
+        app:layout_constraintLeft_toLeftOf="@id/descargar"
+        app:layout_constraintRight_toRightOf="@id/descargar"
+        app:layout_constraintTop_toTopOf="@id/descargar"
+        />
+
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

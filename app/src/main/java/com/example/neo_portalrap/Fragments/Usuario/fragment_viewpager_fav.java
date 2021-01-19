@@ -45,34 +45,20 @@ public class fragment_viewpager_fav extends Fragment {
         int num_object = args.getInt(ARG_OBJECT);
         Log.d("VER" , "Object: " + num_object);
 
-        /*layoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(layoutManager);
-
 
         if(num_object == 1){
             //bases fav / SOLO Favoritas
-            for (int i = 0; i < 120; i++){
-                arrayList.add(i);
-            }
         }
         else if(num_object == 2){
             //grabaciones fav / SOLO Favoritas
-
-            for (int i = 120; i > 0; i--){
-                arrayList.add(i);
-            }
         }
         else {
             //mis bases fav / SOLO Favoritas
-            for (int i = 0; i < 120; i++){
-                arrayList.add(i);
-            }
         }
 
 
-        mAdapter = new AdaptadorRecycleView(arrayList);
-        recyclerView.setAdapter(mAdapter);
-*/
+
+
 
     }
 }

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.example.neo_portalrap.Adaptadores.AdapterSelBases;
 import com.example.neo_portalrap.Clases.Base;
+import com.example.neo_portalrap.MainActivity;
 import com.example.neo_portalrap.R;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -21,12 +22,9 @@ import java.util.ArrayList;
 
 public class SeleccionBases extends Fragment {
 
-    ArrayList <Base> arrayList;
     private RecyclerView recyclerView;
     private AdapterSelBases mAdapter;
     private RecyclerView.LayoutManager layoutManager;
-
-
     FirebaseFirestore db;
 
 
@@ -40,11 +38,9 @@ public class SeleccionBases extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-       View v = inflater.inflate(R.layout.fragment_seleccion_bases, container, false);
+        View v = inflater.inflate(R.layout.fragment_seleccion_bases, container, false);
 
-        arrayList = new ArrayList<>();
-
-        recyclerView = (RecyclerView) v.findViewById(R.id.recyselbases);
+        recyclerView = v.findViewById(R.id.recyselbases);
         recyclerView.setHasFixedSize(true);
         layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
@@ -58,17 +54,16 @@ public class SeleccionBases extends Fragment {
         db.collection("Bases")
                 .orderBy("nombre")
                 .addSnapshotListener((snapshots, e) -> {
-                    arrayList.clear();
                     recyclerView.setAdapter(null);
                     assert snapshots != null;
                     for (DocumentSnapshot document : snapshots) {
                         Base beat = document.toObject(Base.class);
                         assert beat != null;
                         beat.setId(document.getId());
-                        arrayList.add(beat);
+                        MainActivity.arrayListSeleccion.add(beat);
                     }
 
-                    mAdapter = new AdapterSelBases(getActivity(), arrayList);
+                    mAdapter = new AdapterSelBases(getActivity(), MainActivity.arrayListSeleccion);
                     recyclerView.setAdapter(mAdapter);
                 });
     }
