@@ -56,12 +56,13 @@
         android:layout_height="18dp"
 
         android:elevation="5dp"
+        android:translationZ="10dp"
         android:indeterminate="true"
         android:scaleX="0.5"
         android:scaleY="0.5"
 
         android:visibility="gone"
-        app:indicatorColor="@color/black"
+        app:indicatorColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@id/descargar"
         app:layout_constraintLeft_toLeftOf="@id/descargar"
         app:layout_constraintRight_toRightOf="@id/descargar"
@@ -103,6 +104,39 @@
         android:background="@drawable/transparent"
         />
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_audio"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+
+        android:elevation="5dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/btn_play_base"
+        app:layout_constraintLeft_toLeftOf="@id/btn_play_base"
+
+        app:layout_constraintRight_toRightOf="@id/btn_play_base"
+        app:layout_constraintTop_toTopOf="@id/btn_play_base"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/audio"
+
+        />
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/carga_stream"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:elevation="5dp"
+        android:indeterminate="true"
+        android:visibility="gone"
+
+        app:indicatorColor="@color/white"
+        app:indicatorSize="40dp"
+        app:layout_constraintBottom_toBottomOf="@id/btn_play_base"
+        app:layout_constraintLeft_toLeftOf="@id/btn_play_base"
+        app:layout_constraintRight_toRightOf="@id/btn_play_base"
+        app:layout_constraintTop_toTopOf="@id/btn_play_base"
+        />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

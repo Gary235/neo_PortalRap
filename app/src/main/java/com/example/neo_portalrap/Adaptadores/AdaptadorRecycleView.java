@@ -5,12 +5,8 @@ import android.content.Context;
 
 import android.media.MediaPlayer;
 import android.net.ConnectivityManager;
-import android.net.ConnectivityManager.NetworkCallback;
 import android.net.Network;
-import android.net.NetworkInfo;
 import android.net.NetworkRequest;
-import android.net.NetworkRequest.Builder;
-import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,15 +17,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
 import com.example.neo_portalrap.Clases.Base;
-import com.example.neo_portalrap.MainActivity;
+import com.example.neo_portalrap.Fragments.Bases;
 import com.example.neo_portalrap.R;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -48,8 +42,8 @@ public class AdaptadorRecycleView extends RecyclerView.Adapter<AdaptadorRecycleV
     String path_file, carpeta = "/neo portal rap/bases/";
     File localFile;
     File file;
-    MediaPlayer mediaPlayer = new MediaPlayer();
-    int counterReproduccion = 0;
+
+    public static MediaPlayer basesPlayer = new MediaPlayer();
 
     public AdaptadorRecycleView(ArrayList<Base> myDataset, Context context, String tag) {
         this.mDataset = myDataset;
@@ -118,11 +112,12 @@ public class AdaptadorRecycleView extends RecyclerView.Adapter<AdaptadorRecycleV
         }   else {
             holder.descargar.setImageResource(R.drawable.ic_descargar);
         }
+
         holder.descargar.setOnClickListener(a -> {
 
             if (!encontrarBeat(mDataset.get(position).getUrl())){
-                if(isNetworkConnected){
                 holder.progress_descarga.setVisibility(View.VISIBLE);
+                if(isNetworkConnected){
                 StorageReference beatRef = mStorage.child("info_bases/bases/" + mDataset.get(position).getUrl());
 
                 path_file = Environment.getExternalStorageDirectory() + carpeta;
@@ -137,13 +132,14 @@ public class AdaptadorRecycleView extends RecyclerView.Adapter<AdaptadorRecycleV
                     // Local temp file has been created
 
                     holder.descargar.setImageResource(R.drawable.ic_descargado);
+                    holder.progress_descarga.setVisibility(View.GONE);
                     Toast.makeText(miContexto, "Beat Descargado con exito", Toast.LENGTH_LONG).show();
-                }).addOnFailureListener(exception -> {
+                })
+                        .addOnFailureListener(exception -> {
                     // Handle any errors
                     Toast.makeText(miContexto, "Error en la descarga", Toast.LENGTH_LONG).show();
 
                 });
-                holder.progress_descarga.setVisibility(View.GONE);
                 }
                 else {
                     Toast.makeText(miContexto, "Error de red", Toast.LENGTH_LONG).show();
@@ -151,24 +147,26 @@ public class AdaptadorRecycleView extends RecyclerView.Adapter<AdaptadorRecycleV
             }
             else {
                     // borrar beat
+                holder.progress_descarga.setVisibility(View.VISIBLE);
                 AlertDialog.Builder mensaje;
                 mensaje = new AlertDialog.Builder(miContexto);
                 mensaje.setTitle("Eliminar Base");
                 mensaje.setMessage(" \n Se borrara la base de tu almacenamiento, pero seguiras pudiendo escucharlo a traves de internet\n \n");
                 mensaje.setPositiveButton("Eliminar", (dialog, which) -> {
-                    holder.progress_descarga.setVisibility(View.VISIBLE);
                     String path = Environment.getExternalStorageDirectory().toString() +
                             "/neo portal rap/bases/" +
                             mDataset.get(position).getUrl();
 
                     File fileaeliminar = new File(path);
                     boolean deleted = fileaeliminar.delete();
-                    if(deleted)
+                    if(deleted){
+                        holder.descargar.setImageResource(R.drawable.ic_descargar);
                         Toast.makeText(miContexto, "Base Eliminada", Toast.LENGTH_SHORT).show();
+
+                    }
                     else
                         Toast.makeText(miContexto, "Error en la eliminación", Toast.LENGTH_SHORT).show();
 
-                    holder.descargar.setImageResource(R.drawable.ic_descargar);
                     holder.progress_descarga.setVisibility(View.GONE);
 
                 });
@@ -177,6 +175,310 @@ public class AdaptadorRecycleView extends RecyclerView.Adapter<AdaptadorRecycleV
                 }));
                 mensaje.create();
                 mensaje.show();
+            }
+
+
+
+        });
+
+
+        holder.imagen.setOnClickListener(a -> {
+
+            Log.d("miMedia", "pos -- " + position);
+            Log.d("miMedia", "base -- " + mDataset.get(position).getNombre());
+            Log.d("miMedia", "mediapos -- " + Bases.mediaPos);
+
+            if (encontrarBeat(mDataset.get(position).getUrl())){
+                //esta descargada
+                Log.d("miMedia", "Esta descargada -");
+                if (Bases.mediaPos != position){
+                    Log.d("miMedia", "otra base clickeada");
+
+                    if (Bases.mediacounter > 0){
+                        Log.d("miMedia", "primera base clickeada");
+
+                        Bases.mediaPosAnt = Bases.mediaPos;
+                        notifyItemChanged(Bases.mediaPosAnt);
+                        basesPlayer.stop();
+                        basesPlayer.reset();
+                        Log.d("miMedia", "mediacounter -- " + Bases.mediacounter);
+
+                    }
+
+                    String path = Environment.getExternalStorageDirectory().toString() +
+                            "/neo portal rap/bases/" +
+                            mDataset.get(position).getUrl();
+
+                    try {
+                        basesPlayer.setDataSource(path);
+                        basesPlayer.prepare();
+                    } catch (IOException exception) { exception.printStackTrace(); }
+
+                    basesPlayer.start();
+                    holder.play.setVisibility(View.GONE);
+                    holder.lottie_audio.setVisibility(View.VISIBLE);
+                    holder.lottie_audio.playAnimation();
+                    holder.lottie_audio.loop(true);
+
+                    Bases.mediaPos = position;
+                    Bases.mediacounter ++;
+
+                    Log.d("miMedia", "base starteada");
+                    Log.d("miMedia", "mediapos cambiada -- " + Bases.mediaPos);
+
+                }
+                else if (basesPlayer.isPlaying() && Bases.mediaPos == position){
+                    Log.d("miMedia", "base pausada -- " );
+
+                    basesPlayer.pause();
+                    holder.play.setVisibility(View.VISIBLE);
+                    holder.lottie_audio.setVisibility(View.GONE);
+                    holder.lottie_audio.cancelAnimation();
+
+
+                }
+                else if (!basesPlayer.isPlaying() && Bases.mediaPos == position){
+                    Log.d("miMedia", "base starteada -- " );
+
+                    basesPlayer.start();
+                    holder.play.setVisibility(View.GONE);
+                    holder.lottie_audio.setVisibility(View.VISIBLE);
+                    holder.lottie_audio.playAnimation();
+                    holder.lottie_audio.loop(true);
+                }
+
+
+            }
+            else {
+                //no esta descargada
+                if (isNetworkConnected){
+                    Log.d("miMedia", "base stremeada -- " );
+                    if (Bases.mediaPos != position){
+                        Log.d("miMedia", "otra base clickeada");
+
+                        holder.progress_stream.setVisibility(View.VISIBLE);
+                        if (Bases.mediacounter > 0){
+                            Log.d("miMedia", "primera base clickeada");
+
+                            Bases.mediaPosAnt = Bases.mediaPos;
+                            notifyItemChanged(Bases.mediaPosAnt);
+                            basesPlayer.stop();
+                            basesPlayer.reset();
+                            Log.d("miMedia", "mediacounter -- " + Bases.mediacounter);
+
+                        }
+                        StorageReference beatref = mStorage.child("info_bases/bases/" + mDataset.get(position).getUrl());
+                        beatref.getDownloadUrl()
+                                .addOnSuccessListener(uri -> {
+
+                                    try {
+                                        // Download url of file
+                                        final String url = uri.toString();
+                                        basesPlayer.setDataSource(url);
+                                        // wait for media player to get prepare
+                                        basesPlayer.setOnPreparedListener(mp ->{
+                                            mp.start();
+                                            holder.progress_stream.setVisibility(View.GONE);
+
+                                        });
+                                        basesPlayer.prepareAsync();
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                })
+                                .addOnFailureListener(e -> { Log.i("TAG", e.getMessage()); });
+
+
+                        Bases.mediaPos = position;
+                        Bases.mediacounter ++;
+
+                        Log.d("miMedia", "base starteada");
+                        Log.d("miMedia", "mediapos cambiada -- " + Bases.mediaPos);
+
+                    }
+
+                    else if (basesPlayer.isPlaying() && Bases.mediaPos == position){
+                        Log.d("miMedia", "base pausada -- " );
+
+
+                        basesPlayer.pause();
+                        holder.play.setVisibility(View.VISIBLE);
+                        holder.lottie_audio.setVisibility(View.GONE);
+                        holder.lottie_audio.cancelAnimation();
+
+
+
+                    }
+                    else if (!basesPlayer.isPlaying() && Bases.mediaPos == position){
+                        Log.d("miMedia", "base starteada -- " );
+
+                        basesPlayer.start();
+                        holder.play.setVisibility(View.GONE);
+                        holder.lottie_audio.setVisibility(View.VISIBLE);
+                        holder.lottie_audio.playAnimation();
+                        holder.lottie_audio.loop(true);
+                    }
+
+
+                }
+                else {
+                    Toast.makeText(miContexto, "Error de red", Toast.LENGTH_LONG).show();
+
+                }
+
+
+            }
+
+
+
+        });
+        holder.play.setOnClickListener(a -> {
+
+            Log.d("miMedia", "pos -- " + position);
+            Log.d("miMedia", "base -- " + mDataset.get(position).getNombre());
+            Log.d("miMedia", "mediapos -- " + Bases.mediaPos);
+
+            if (encontrarBeat(mDataset.get(position).getUrl())){
+                //esta descargada
+                Log.d("miMedia", "Esta descargada -");
+                if (Bases.mediaPos != position){
+                    Log.d("miMedia", "otra base clickeada");
+
+                    if (Bases.mediacounter > 0){
+                        Log.d("miMedia", "primera base clickeada");
+
+                        Bases.mediaPosAnt = Bases.mediaPos;
+                        notifyItemChanged(Bases.mediaPosAnt);
+                        basesPlayer.stop();
+                        basesPlayer.reset();
+                        Log.d("miMedia", "mediacounter -- " + Bases.mediacounter);
+
+                    }
+
+                    String path = Environment.getExternalStorageDirectory().toString() +
+                            "/neo portal rap/bases/" +
+                            mDataset.get(position).getUrl();
+
+                    try {
+                        basesPlayer.setDataSource(path);
+                        basesPlayer.prepare();
+                    } catch (IOException exception) { exception.printStackTrace(); }
+
+                    basesPlayer.start();
+                    holder.play.setVisibility(View.GONE);
+                    holder.lottie_audio.setVisibility(View.VISIBLE);
+                    holder.lottie_audio.playAnimation();
+                    holder.lottie_audio.loop(true);
+
+                    Bases.mediaPos = position;
+                    Bases.mediacounter ++;
+
+                    Log.d("miMedia", "base starteada");
+                    Log.d("miMedia", "mediapos cambiada -- " + Bases.mediaPos);
+
+                }
+                else if (basesPlayer.isPlaying() && Bases.mediaPos == position){
+                    Log.d("miMedia", "base pausada -- " );
+
+                    basesPlayer.pause();
+                    holder.play.setVisibility(View.VISIBLE);
+                    holder.lottie_audio.setVisibility(View.GONE);
+                    holder.lottie_audio.cancelAnimation();
+
+
+                }
+                else if (!basesPlayer.isPlaying() && Bases.mediaPos == position){
+                    Log.d("miMedia", "base starteada -- " );
+
+                    basesPlayer.start();
+                    holder.play.setVisibility(View.GONE);
+                    holder.lottie_audio.setVisibility(View.VISIBLE);
+                    holder.lottie_audio.playAnimation();
+                    holder.lottie_audio.loop(true);
+                }
+
+
+            }
+            else {
+                //no esta descargada
+                if (isNetworkConnected){
+                    Log.d("miMedia", "base stremeada -- " );
+                    if (Bases.mediaPos != position){
+                        Log.d("miMedia", "otra base clickeada");
+
+                        holder.progress_stream.setVisibility(View.VISIBLE);
+                        if (Bases.mediacounter > 0){
+                            Log.d("miMedia", "primera base clickeada");
+
+                            Bases.mediaPosAnt = Bases.mediaPos;
+                            notifyItemChanged(Bases.mediaPosAnt);
+                            basesPlayer.stop();
+                            basesPlayer.reset();
+                            Log.d("miMedia", "mediacounter -- " + Bases.mediacounter);
+
+                        }
+                        StorageReference beatref = mStorage.child("info_bases/bases/" + mDataset.get(position).getUrl());
+                        beatref.getDownloadUrl()
+                                .addOnSuccessListener(uri -> {
+
+                                    try {
+                                        // Download url of file
+                                        final String url = uri.toString();
+                                        basesPlayer.setDataSource(url);
+                                        // wait for media player to get prepare
+                                        basesPlayer.setOnPreparedListener(mp ->{
+                                            mp.start();
+                                            holder.progress_stream.setVisibility(View.GONE);
+
+                                        });
+                                        basesPlayer.prepareAsync();
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                })
+                                .addOnFailureListener(e -> { Log.i("TAG", e.getMessage()); });
+
+
+                        Bases.mediaPos = position;
+                        Bases.mediacounter ++;
+
+                        Log.d("miMedia", "base starteada");
+                        Log.d("miMedia", "mediapos cambiada -- " + Bases.mediaPos);
+
+                    }
+
+                    else if (basesPlayer.isPlaying() && Bases.mediaPos == position){
+                        Log.d("miMedia", "base pausada -- " );
+
+
+                        basesPlayer.pause();
+                        holder.play.setVisibility(View.VISIBLE);
+                        holder.lottie_audio.setVisibility(View.GONE);
+                        holder.lottie_audio.cancelAnimation();
+
+
+
+                    }
+                    else if (!basesPlayer.isPlaying() && Bases.mediaPos == position){
+                        Log.d("miMedia", "base starteada -- " );
+
+                        basesPlayer.start();
+                        holder.play.setVisibility(View.GONE);
+                        holder.lottie_audio.setVisibility(View.VISIBLE);
+                        holder.lottie_audio.playAnimation();
+                        holder.lottie_audio.loop(true);
+                    }
+
+
+                }
+                else {
+                    Toast.makeText(miContexto, "Error de red", Toast.LENGTH_LONG).show();
+
+                }
+
+
             }
 
 
@@ -232,8 +534,8 @@ public class AdaptadorRecycleView extends RecyclerView.Adapter<AdaptadorRecycleV
         RoundedImageView imagen;
         ImageButton play, fav;
         ImageView descargar;
-        CircularProgressIndicator progress_descarga;
-
+        CircularProgressIndicator progress_descarga, progress_stream;
+        LottieAnimationView lottie_audio;
 
         public MyViewHolder(View v) {
             super(v);
@@ -245,6 +547,8 @@ public class AdaptadorRecycleView extends RecyclerView.Adapter<AdaptadorRecycleV
             imagen = v.findViewById(R.id.img_base);
             descargar = v.findViewById(R.id.descargar);
             progress_descarga = v.findViewById(R.id.carga_descarga);
+            progress_stream = v.findViewById(R.id.carga_stream);
+            lottie_audio = v.findViewById(R.id.lottie_audio);
 
 
         }
